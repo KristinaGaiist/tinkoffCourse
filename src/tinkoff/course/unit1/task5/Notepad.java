@@ -19,9 +19,32 @@ public class Notepad {
     private final NoteNameValidator noteNameValidator = new NoteNameValidator();
 
     /**
+     * The field for array length without null elements
+     */
+    private int size = 0;
+
+    /**
+     * The field for array length
+     */
+    private int capacity;
+
+    /**
      * The field to save all notes
      */
-    private Note[] notes = new Note[]{};
+    private Note[] notes;
+
+    public Notepad() {
+        this(10);
+    }
+
+    public Notepad(int capacity) {
+        if (capacity < 1) {
+            throw new IllegalArgumentException("Capacity can't be less than 1.");
+        }
+
+        this.capacity = capacity;
+        this.notes = new Note[capacity];
+    }
 
     /**
      * Adding a new note to the end of the array of all notes.
@@ -33,15 +56,17 @@ public class Notepad {
      */
     public void addNote(Note newNote) {
         noteNameValidator.validateNoteNameToNull(newNote.getName());
-        noteNameValidator.validateNoteNameToExist(newNote.getName(), notes);
-
-        Note[] newNotes = copyNotesToNewArray();
+        noteNameValidator.validateNoteNameToExist(newNote.getName(), notes, size);
 
         newNote.setId(UUID.randomUUID());
         newNote.setCreatedDate(LocalDateTime.now());
-        newNotes[newNotes.length - 1] = newNote;
 
-        notes = newNotes;
+        if (size == capacity) {
+            updateCapacity();
+        }
+
+        notes[size] = newNote;
+        size++;
     }
 
     /**
@@ -56,6 +81,7 @@ public class Notepad {
         int index = getNoteIndex(newNote.getId());
 
         newNote.setModifiedDate(LocalDateTime.now());
+        //newNote.setCreatedDate(notes[index].getCreatedDate());
         notes[index] = newNote;
     }
 
@@ -69,30 +95,27 @@ public class Notepad {
      *      * </pre></blockquote>
      */
     public void showAllNotes() {
-        if (notes.length == 0) {
+        if (size == 0) {
             System.out.println("В блокноте нет записей");
             return;
         }
 
-        for (Note note : notes) {
-            String modifiedDateString = note.getModifiedDate() == null ? ""
-                    : "; modified date: " + note.getModifiedDate();
-            System.out.println(note.getName() + ". Created date: " + note.getCreatedDate() + modifiedDateString);
-            System.out.println(note.getContent());
-            System.out.println();
+        for (int i = 0; i < size; i++) {
+            System.out.println(notes[i].toString());
         }
     }
 
     /**
-     * Create new array with length greater than length of old array to 1. Copy all elements of old array to new array.
-     *
-     * @return new array with all elements from old array with 1 empty space at the ending of new array
+     * Create new array with length greater than length of old array in twice.
+     * Copy all elements of old array to new array.
      */
-    private Note[] copyNotesToNewArray() {
-        Note[] newNotes = new Note[notes.length + 1];
-        System.arraycopy(notes, 0, newNotes, 0, notes.length);
+    private void updateCapacity() {
+        capacity = capacity * 2;
 
-        return newNotes;
+        Note[] oldNotes = notes;
+        notes = new Note[capacity];
+
+        System.arraycopy(oldNotes, 0, notes, 0, size);
     }
 
     /**
@@ -106,7 +129,7 @@ public class Notepad {
         if (id == null) {
             throw new IllegalArgumentException("Note id can't be null");
         }
-        for (int i = 0; i < notes.length; i++) {
+        for (int i = 0; i < size; i++) {
             if (notes[i].getId().equals(id)) {
                 return i;
             }

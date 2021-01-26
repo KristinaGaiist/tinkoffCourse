@@ -124,4 +124,14 @@ public class Note {
     public void setModifiedDate(LocalDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
+
+    @Override
+    public String toString() {
+        String modifiedDateString = modifiedDate == null ? "" : ", modifiedDate=" + modifiedDate;
+        String createdDateString = createdDate == null ? "" : ", createdDate=" + createdDate;
+        return "name='" + name + '\'' +
+                ", content='" + content + '\'' +
+                createdDateString +
+                modifiedDateString;
+    }
 }

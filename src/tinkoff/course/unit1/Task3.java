@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Task3 {
 
-    public int[][] fullArrayByRandomNumbers() {
+    private static int[][] fullArrayByRandomNumbers() {
         int arrayLineSize = 5;
         int arrayColumnSize = 8;
         Random random = new Random();
@@ -19,7 +19,7 @@ public class Task3 {
         return array;
     }
 
-    public int[][] fullArrayByMaxAndMinNumbers(int[][] array) {
+    private static int[][] fullArrayByMaxAndMinNumbers(int[][] array) {
         int arrayLineSize = array.length;
         int[][] resultArray = new int[arrayLineSize][2];
 
@@ -45,7 +45,7 @@ public class Task3 {
     }
 
 
-    public void printArray(int[][] array) {
+    private static void printArray(int[][] array) {
         for (int[] line : array) {
             for (int number : line) {
                 System.out.print(number + " ");
@@ -53,5 +53,11 @@ public class Task3 {
             System.out.println();
         }
         System.out.println();
+    }
+
+    public static void main(String... args) {
+        int[][] array = fullArrayByRandomNumbers();
+        printArray(array);
+        printArray(fullArrayByMaxAndMinNumbers(array));
     }
 }

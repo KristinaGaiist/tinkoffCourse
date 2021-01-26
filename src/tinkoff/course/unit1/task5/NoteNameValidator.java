@@ -25,12 +25,12 @@ class NoteNameValidator {
      * @param noteName - note's name
      * @param notes    - array of notes
      */
-    public void validateNoteNameToExist(String noteName, Note[] notes) {
+    public void validateNoteNameToExist(String noteName, Note[] notes, int size) {
         if (notes == null || notes.length == 0) {
             return;
         }
-        for (Note note : notes) {
-            if (noteName.equals(note.getName())) {
+        for (int i = 0; i < size; i++) {
+            if (noteName.equals(notes[i].getName())) {
                 throw new NotepadPublicException(noteName);
             }
         }

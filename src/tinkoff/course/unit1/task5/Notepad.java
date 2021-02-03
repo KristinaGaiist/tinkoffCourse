@@ -81,7 +81,6 @@ public class Notepad {
         int index = getNoteIndex(newNote.getId());
 
         newNote.setModifiedDate(LocalDateTime.now());
-        //newNote.setCreatedDate(notes[index].getCreatedDate());
         notes[index] = newNote;
     }
 

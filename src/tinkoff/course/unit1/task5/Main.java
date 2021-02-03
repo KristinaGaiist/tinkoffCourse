@@ -7,13 +7,11 @@ public class Main {
 
         Note note1 = new Note();
         note1.setName("note1");
-        //  note1.setName(null);
         note1.setContent("12345^&*");
         notepad.addNote(note1);
 
         Note note2 = new Note();
         note2.setName("note2");
-        //  note2.setName("note1");
         note2.setContent("vnbnbn\njhjh");
         notepad.addNote(note2);
 
@@ -25,7 +23,6 @@ public class Main {
         Note editNote = new Note();
         editNote.setId(note1.getId());
         editNote.setName("main NOTE");
-        //  editNote.setId(UUID.randomUUID());
         notepad.editNote(editNote);
 
         notepad.showAllNotes();

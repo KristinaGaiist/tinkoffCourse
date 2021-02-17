@@ -3,7 +3,8 @@ package unit2.task1.cmd;
 import java.util.Optional;
 import unit2.task1.domain.Employee;
 import unit2.task1.domain.Office;
-import unit2.task1.domain.OfficeSupply;
+import unit2.task1.domain.task2.OfficeSupply;
+import unit2.task1.domain.task2.OfficeSupplyCreator;
 
 public class AddSupplyCommand implements ICommand {
 
@@ -45,6 +46,6 @@ public class AddSupplyCommand implements ICommand {
 			System.out.println(String.format(Messages.EMPLOYEE_NOT_FOUND, id) + Messages.TRY_AGAIN);
 			return;
 		}
-		employee.get().getWorkPlace().add(new OfficeSupply(arguments[1], cost));
+		employee.get().getWorkPlace().add(OfficeSupplyCreator.create(arguments[1], cost));
 	}
 }

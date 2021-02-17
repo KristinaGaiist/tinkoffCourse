@@ -51,6 +51,6 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return id + " " + firstName + " " + lastName;
+		return id + " " + firstName + " " + lastName + " " + fired;
 	}
 }

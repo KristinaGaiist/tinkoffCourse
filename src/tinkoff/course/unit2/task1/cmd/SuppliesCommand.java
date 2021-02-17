@@ -3,7 +3,7 @@ package unit2.task1.cmd;
 import java.util.Optional;
 import unit2.task1.domain.Employee;
 import unit2.task1.domain.Office;
-import unit2.task1.domain.OfficeSupply;
+import unit2.task1.domain.task2.OfficeSupply;
 
 public class SuppliesCommand implements ICommand {
 

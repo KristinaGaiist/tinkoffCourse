@@ -5,14 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+
 import unit2.task1.domain.Employee;
 import unit2.task1.domain.Office;
 import unit2.task1.domain.OfficeSuppliesCostCalculator;
-import unit2.task1.domain.OfficeSupply;
 
 public class Main {
 

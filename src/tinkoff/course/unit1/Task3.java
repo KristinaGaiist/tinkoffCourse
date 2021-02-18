@@ -4,6 +4,12 @@ import java.util.Random;
 
 public class Task3 {
 
+    public static void main(String... args) {
+        int[][] array = fullArrayByRandomNumbers();
+        printArray(array);
+        printArray(fullArrayByMaxAndMinNumbers(array));
+    }
+
     private static int[][] fullArrayByRandomNumbers() {
         int arrayLineSize = 5;
         int arrayColumnSize = 8;
@@ -53,11 +59,5 @@ public class Task3 {
             System.out.println();
         }
         System.out.println();
-    }
-
-    public static void main(String... args) {
-        int[][] array = fullArrayByRandomNumbers();
-        printArray(array);
-        printArray(fullArrayByMaxAndMinNumbers(array));
     }
 }

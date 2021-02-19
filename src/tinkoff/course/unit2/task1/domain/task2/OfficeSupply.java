@@ -41,14 +41,12 @@ public abstract class OfficeSupply {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		OfficeSupply that = (OfficeSupply) o;
-		return id == that.id &&
-				Double.compare(that.cost, cost) == 0 &&
-				Objects.equals(name, that.name);
+		return id == that.id && Objects.equals(name, that.name);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, cost);
+		return Objects.hash(id, name);
 	}
 
 	@Override

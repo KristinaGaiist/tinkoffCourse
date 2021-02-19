@@ -8,6 +8,7 @@ public class Employee {
 
 	private final int id;
 	private final String firstName;
+
 	private final String lastName;
 	private final WorkPlace workPlace;
 	private boolean fired = false;
@@ -21,6 +22,14 @@ public class Employee {
 
 	public int getId() {
 		return id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
 	}
 
 	public WorkPlace getWorkPlace() {
@@ -40,13 +49,13 @@ public class Employee {
 			return false;
 		}
 		Employee employee = (Employee) o;
-		return id == employee.id && Objects.equals(firstName, employee.firstName) && Objects.equals(
-			lastName, employee.lastName) && Objects.equals(workPlace, employee.workPlace);
+		return id == employee.id && Objects.equals(firstName, employee.firstName)
+				&& Objects.equals(lastName, employee.lastName);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, firstName, lastName, workPlace);
+		return Objects.hash(id, firstName, lastName);
 	}
 
 	@Override

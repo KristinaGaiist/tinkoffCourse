@@ -1,5 +1,7 @@
 package unit2.task1.domain;
 
+import unit2.task1.exception.EmployeeNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,17 +19,17 @@ public class Office {
 		this.employees.add(employee);
 	}
 
-	public List<Employee> getEmployees() {
+	public Iterable<Employee> getEmployees() {
 		return employees;
 	}
 
-	public Optional<Employee> getEmployeeById(int id) {
+	public Employee getEmployeeById(int id) {
 		for (Employee employee : employees) {
 			if (employee.getId() == id) {
-				return Optional.of(employee);
+				return employee;
 			}
 		}
-		return Optional.empty();
+		throw new EmployeeNotFoundException(id);
 	}
 
 	@Override

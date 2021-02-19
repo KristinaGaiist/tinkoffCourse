@@ -11,16 +11,13 @@ public class WorkPlace {
 
 	private Employee employee;
 	private List<OfficeSupply> officeSupplies;
-	//task2
-	private final List<OfficeSupply> beginnersKit;
 
 	public WorkPlace(Employee employee) {
 		this.employee = employee;
-		this.officeSupplies = new ArrayList<>();
-		beginnersKit = new ArrayList<>();
-		beginnersKit.add(new Pen(33.12, PenColor.BLUE));
-		beginnersKit.add(new Ruler(53.12, 30));
-		beginnersKit.add(new NoteBook(144.1, 50, PageType.PLANE));
+		officeSupplies = new ArrayList<>();
+		officeSupplies.add(new Pen(33.12, PenColor.BLUE));
+		officeSupplies.add(new Ruler(53.12, 30));
+		officeSupplies.add(new NoteBook(144.1, 50, PageType.PLANE));
 	}
 
 	public Iterable<OfficeSupply> getOfficeSupplies() {
@@ -36,14 +33,12 @@ public class WorkPlace {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		WorkPlace workPlace = (WorkPlace) o;
-		return Objects.equals(employee, workPlace.employee) &&
-				Objects.equals(officeSupplies, workPlace.officeSupplies) &&
-				Objects.equals(beginnersKit, workPlace.beginnersKit);
+		return Objects.equals(officeSupplies, workPlace.officeSupplies);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(employee, officeSupplies, beginnersKit);
+		return Objects.hash(officeSupplies);
 	}
 
 	@Override

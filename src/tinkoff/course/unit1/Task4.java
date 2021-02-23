@@ -1,6 +1,21 @@
 package unit1;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Task4 {
+
+    public static void main(String... args) {
+        try {
+            int a = readInt("Введите целочисленное a: ");
+            int b = readInt("Введите целочисленное b: ");
+            int c = readInt("Введите целочисленное c: ");
+            printEquationResult(a, b, c);
+        } catch (Exception e) {
+            System.out.println("Произошла непредвиденная ошибка.");
+        }
+    }
 
     private static void printEquationResult(int a, int b, int c) {
         int aAndC = Math.multiplyExact(a, c);
@@ -21,10 +36,18 @@ public class Task4 {
         }
     }
 
-    public static void main(String... args) {
-        printEquationResult(1, 6, 9);
-        printEquationResult(4, 6, 1);
-        printEquationResult(45, 6, 1);
+    private static int readInt(String message) throws IOException {
+        System.out.print(message);
+        InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
+        while (true) {
+            try {
+                String line = bufferedReader.readLine();
+                return Integer.parseInt(line);
+            } catch (NumberFormatException e) {
+                System.out.print("Попробуйте еще раз. " + message);
+            }
+        }
     }
 }

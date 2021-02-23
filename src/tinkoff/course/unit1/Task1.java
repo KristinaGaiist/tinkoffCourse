@@ -2,6 +2,12 @@ package unit1;
 
 public class Task1 {
 
+    public static void main(String... args) {
+        printArray(arrayOfEvenNumbersCase1());
+        printArray(arrayOfEvenNumbersCase2());
+        printArray(arrayOfEvenNumbersCase3());
+    }
+
     private static int[] arrayOfEvenNumbersCase1() {
         int size = 100;
         int evenNumber = 0;
@@ -12,7 +18,8 @@ public class Task1 {
             array[i] = evenNumber;
         }
 
-        return multiplyArrayElements(array);
+        multiplyArrayElements(array);
+        return array;
     }
 
     private static int[] arrayOfEvenNumbersCase2() {
@@ -27,7 +34,8 @@ public class Task1 {
             i++;
         }
 
-        return multiplyArrayElements(array);
+        multiplyArrayElements(array);
+        return array;
     }
 
     private static int[] arrayOfEvenNumbersCase3() {
@@ -43,7 +51,8 @@ public class Task1 {
         }
         while (i < size);
 
-        return multiplyArrayElements(array);
+        multiplyArrayElements(array);
+        return array;
     }
 
     private static void printArray(int[] array) {
@@ -53,17 +62,9 @@ public class Task1 {
         System.out.println();
     }
 
-    private static int[] multiplyArrayElements(int[] array) {
-        int[] result = new int[array.length - 1];
-        for (int i = 1; i < array.length; i++) {
-            result[i - 1] = array[i] * array[i - 1];
+    private static void multiplyArrayElements(int[] array) {
+        for (int i = 1; i < array.length; i += 2) {
+            array[i] = array[i] * array[i - 1];
         }
-        return result;
-    }
-
-    public static void main(String... args) {
-        printArray(arrayOfEvenNumbersCase1());
-        printArray(arrayOfEvenNumbersCase2());
-        printArray(arrayOfEvenNumbersCase3());
     }
 }

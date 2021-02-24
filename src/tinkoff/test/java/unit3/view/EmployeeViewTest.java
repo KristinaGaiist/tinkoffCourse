@@ -1,73 +1,48 @@
 package unit3.view;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.contrib.java.lang.system.SystemOutRule;
-import org.junit.runner.RunWith;
+import java.util.Arrays;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import unit2.task1.application.EmployeeService;
+import unit2.task1.application.contracts.EmployeeDto;
 import unit2.task1.cmd.views.EmployeeView;
-import unit2.task1.domain.Employee;
-import unit2.task1.domain.Office;
 import unit2.task1.exception.IllegalArgumentsSizeException;
-import unit3.CommonTests;
 
-@RunWith(MockitoJUnitRunner.class)
-public class EmployeeViewTest extends CommonTests {
+@ExtendWith(MockitoExtension.class)
+public class EmployeeViewTest {
 
-    @Rule
-    public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
-
-    @InjectMocks
+    @Mock
     private EmployeeService service;
     @InjectMocks
     private EmployeeView view;
 
     @Test
     public void getAllEmployeesTest() {
-        mockDataStorage();
-
-        service.add("Кристина", "Киринюк");
-        service.add("Диана", "Шагдонова");
-        service.add("Оля", "Петросян");
-
+        when(service.getAll()).thenReturn(Arrays.asList(new EmployeeDto("Кристина", "Киринюк"),
+                                                        new EmployeeDto("Диана", "Шагдонова"),
+                                                        new EmployeeDto("Оля", "Петросян")));
         view.getAll();
-        String log = systemOutRule.getLog().replaceAll("\r\n", " ");
-
-        assertThat("Кристина Киринюк Диана Шагдонова Оля Петросян").isEqualTo(log.trim());
+        verify(service).getAll();
     }
 
     @Test
     public void addEmployeeTest() {
-        Office office = new Office();
-        mockDataStorage(office);
-
         view.addEmployee(new String[]{"Кристина", "Киринюк"});
-
-        assertThat(office.getEmployees())
-            .hasSize(1)
-            .extracting(Employee::getFirstName)
-            .containsExactlyInAnyOrder("Кристина");
-
-        assertThat(office.getEmployees())
-            .extracting(Employee::getLastName)
-            .containsExactlyInAnyOrder("Киринюк");
+        verify(service).add("Кристина", "Киринюк");
     }
 
     @Test
     public void fireEmployeeTest() {
-        Employee employee = createEmployeeWithRuler();
-
-        mockDataStorage(createOfficeAndAddEmployees(employee));
-        view.fireEmployee(new String[]{String.valueOf(employee.getId())});
-
-        assertTrue(employee.isFired());
+        view.fireEmployee(new String[]{String.valueOf(0)});
+        verify(service).fireEmployee(0);
     }
 
     @Test

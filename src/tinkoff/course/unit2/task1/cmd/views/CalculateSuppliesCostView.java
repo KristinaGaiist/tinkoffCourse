@@ -4,14 +4,13 @@ import unit2.task1.application.CalculateSuppliesCostService;
 import unit2.task1.cmd.Messages;
 import unit2.task1.cmd.ParseHelper;
 import unit2.task1.exception.IllegalArgumentsSizeException;
-import unit2.task1.persistence.IDataStorage;
 
 public class CalculateSuppliesCostView {
 
     private final CalculateSuppliesCostService calculateSuppliesCostService;
 
-    public CalculateSuppliesCostView(IDataStorage storage) {
-        this.calculateSuppliesCostService = new CalculateSuppliesCostService(storage);
+    public CalculateSuppliesCostView(CalculateSuppliesCostService calculateSuppliesCostService) {
+        this.calculateSuppliesCostService = calculateSuppliesCostService;
     }
 
     public void calculateCost(String[] arguments) {

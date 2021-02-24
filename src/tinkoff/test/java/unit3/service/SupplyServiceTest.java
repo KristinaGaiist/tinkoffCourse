@@ -3,14 +3,16 @@ package unit3.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import unit2.task1.application.SupplyService;
 import unit2.task1.application.contracts.SupplyDto;
 import unit2.task1.domain.Employee;
@@ -23,11 +25,14 @@ import unit2.task1.domain.task2.Pen;
 import unit2.task1.domain.task2.PenColor;
 import unit2.task1.domain.task2.Ruler;
 import unit2.task1.exception.EmployeeNotFoundException;
-import unit3.CommonTests;
+import unit2.task1.persistence.IDataStorage;
+import unit3.CreateEntityHelper;
 
-@RunWith(MockitoJUnitRunner.class)
-public class SupplyServiceTest extends CommonTests {
+@ExtendWith(MockitoExtension.class)
+public class SupplyServiceTest {
 
+    @Mock
+    private IDataStorage dataStorage;
     @InjectMocks
     private SupplyService service;
 
@@ -42,7 +47,7 @@ public class SupplyServiceTest extends CommonTests {
         WorkPlace workPlace2 = employee2.getWorkPlace();
         workPlace2.add(new NoteBook(245.7, 130, PageType.LINE));
 
-        mockDataStorage(createOfficeAndAddEmployees(employee1, employee2));
+        when(dataStorage.getOffice()).thenReturn(CreateEntityHelper.createOfficeAndAddEmployees(employee1, employee2));
 
         assertThat(service.getAll(employee1.getId()))
             .hasSize(5)
@@ -68,8 +73,8 @@ public class SupplyServiceTest extends CommonTests {
     @Test
     public void addSupplyTest() {
         Employee employee = new Employee("Кристина", "Киринюк");
-        Office office = createOfficeAndAddEmployees(employee);
-        mockDataStorage(office);
+        Office office = CreateEntityHelper.createOfficeAndAddEmployees(employee);
+        when(dataStorage.getOffice()).thenReturn(office);
 
         service.add(employee.getId(), "линейка", 50.5);
         service.add(employee.getId(), "ручка", 30.5);
@@ -91,7 +96,7 @@ public class SupplyServiceTest extends CommonTests {
     @Test
     public void employeeIdNotFoundTest() {
         int wrongId = 100;
-        mockDataStorage();
+        when(dataStorage.getOffice()).thenReturn(new Office());
 
         EmployeeNotFoundException exception = assertThrows(EmployeeNotFoundException.class,
                                                            () -> service.add(wrongId, "линейка", 44.5));
@@ -100,9 +105,9 @@ public class SupplyServiceTest extends CommonTests {
 
     @Test
     public void officeSupplierNotFoundTest() {
-        Employee employee = createEmployeeWithRuler();
+        Employee employee = CreateEntityHelper.createEmployeeWithRuler();
 
-        mockDataStorage(createOfficeAndAddEmployees(employee));
+        when(dataStorage.getOffice()).thenReturn(CreateEntityHelper.createOfficeAndAddEmployees(employee));
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                                                           () -> service.add(employee.getId(), "нож", 44.5));
         assertEquals("Канцелярского товара нож не существует", exception.getMessage());

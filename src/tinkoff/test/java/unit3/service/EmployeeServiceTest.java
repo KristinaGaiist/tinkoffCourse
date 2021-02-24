@@ -4,27 +4,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import unit2.task1.application.EmployeeService;
 import unit2.task1.application.contracts.EmployeeDto;
 import unit2.task1.domain.Employee;
 import unit2.task1.domain.Office;
 import unit2.task1.exception.EmployeeNotFoundException;
-import unit3.CommonTests;
+import unit2.task1.persistence.IDataStorage;
+import unit3.CreateEntityHelper;
 
-@RunWith(MockitoJUnitRunner.class)
-public class EmployeeServiceTest extends CommonTests {
+@ExtendWith(MockitoExtension.class)
+public class EmployeeServiceTest {
 
+    @Mock
+    private IDataStorage dataStorage;
     @InjectMocks
     private EmployeeService service;
 
     @Test
     public void getAllEmployeesTest() {
-        mockDataStorage();
+        when(dataStorage.getOffice()).thenReturn(new Office());
 
         service.add("Кристина", "Киринюк");
         service.add("Диана", "Шагдонова");
@@ -43,7 +48,7 @@ public class EmployeeServiceTest extends CommonTests {
     @Test
     public void addEmployeeTest() {
         Office office = new Office();
-        mockDataStorage(office);
+        when(dataStorage.getOffice()).thenReturn(office);
 
         service.add("Кристина", "Киринюк");
 
@@ -59,8 +64,8 @@ public class EmployeeServiceTest extends CommonTests {
 
     @Test
     public void fireEmployeeTest() {
-        Employee employee = createEmployeeWithRuler();
-        mockDataStorage(createOfficeAndAddEmployees(employee));
+        Employee employee = CreateEntityHelper.createEmployeeWithRuler();
+        when(dataStorage.getOffice()).thenReturn(CreateEntityHelper.createOfficeAndAddEmployees(employee));
 
         service.fireEmployee(employee.getId());
         assertTrue(employee.isFired());
@@ -69,7 +74,7 @@ public class EmployeeServiceTest extends CommonTests {
     @Test
     public void employeeIdNotFoundTest() {
         int wrongId = 100;
-        mockDataStorage();
+        when(dataStorage.getOffice()).thenReturn(new Office());
 
         EmployeeNotFoundException exception = assertThrows(EmployeeNotFoundException.class,
                                                            () -> service.fireEmployee(wrongId));

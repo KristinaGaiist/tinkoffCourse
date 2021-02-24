@@ -1,39 +1,30 @@
 package unit3.view;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.contrib.java.lang.system.SystemOutRule;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import unit2.task1.application.CalculateSuppliesCostService;
 import unit2.task1.cmd.views.CalculateSuppliesCostView;
-import unit2.task1.domain.Employee;
 import unit2.task1.exception.IllegalArgumentsSizeException;
-import unit3.CommonTests;
 
-@RunWith(MockitoJUnitRunner.class)
-public class CalculateSuppliesCostViewTest extends CommonTests {
+@ExtendWith(MockitoExtension.class)
+public class CalculateSuppliesCostViewTest {
 
-    @Rule
-    public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
-
+    @Mock
+    private CalculateSuppliesCostService service;
     @InjectMocks
     private CalculateSuppliesCostView view;
 
     @Test
     public void calculateTest() {
-        Employee employee = createEmployeeWithRuler();
-        mockDataStorage(createOfficeAndAddEmployees(employee));
-
-        view.calculateCost(new String[]{String.valueOf(employee.getId())});
-        String log = systemOutRule.getLog().replaceAll("\r\n", " ");
-
-        assertThat(String.format("Стоимост канцтоваров у сотрудника %d равна 274,90", employee.getId()))
-            .isEqualTo(log.trim());
+        view.calculateCost(new String[]{String.valueOf(0)});
+        verify(service).calculate(0);
     }
 
     @Test

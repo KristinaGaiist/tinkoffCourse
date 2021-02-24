@@ -6,7 +6,7 @@ public class ParseHelper {
         try {
             return Integer.parseInt(stringNumber);
         } catch (NumberFormatException e) {
-            throw new NullPointerException(Messages.ERROR_STRING_FOR_PARSE_TO_INT);
+            throw new NumberFormatException(String.format(Messages.ERROR_STRING_FOR_PARSE_TO_INT, stringNumber));
         }
     }
 
@@ -14,7 +14,7 @@ public class ParseHelper {
         try {
             return Double.parseDouble(stringNumber);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(Messages.ERROR_STRING_FOR_PARSE_TO_DOUBLE);
+            throw new NumberFormatException(String.format(Messages.ERROR_STRING_FOR_PARSE_TO_DOUBLE, stringNumber));
         }
     }
 }

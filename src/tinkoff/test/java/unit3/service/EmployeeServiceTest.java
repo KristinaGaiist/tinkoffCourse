@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -37,12 +38,9 @@ public class EmployeeServiceTest {
 
         assertThat(service.getAll())
             .hasSize(3)
-            .extracting(EmployeeDto::getFirstName)
-            .containsExactlyInAnyOrder("Кристина", "Диана", "Оля");
-
-        assertThat(service.getAll())
-            .extracting(EmployeeDto::getLastName)
-            .containsExactlyInAnyOrder("Киринюк", "Шагдонова", "Петросян");
+            .containsExactlyInAnyOrder(new EmployeeDto("Кристина", "Киринюк"),
+                                       new EmployeeDto("Диана", "Шагдонова"),
+                                       new EmployeeDto("Оля", "Петросян"));
     }
 
     @Test
@@ -54,12 +52,8 @@ public class EmployeeServiceTest {
 
         assertThat(office.getEmployees())
             .hasSize(1)
-            .extracting(Employee::getFirstName)
-            .containsExactlyInAnyOrder("Кристина");
-
-        assertThat(office.getEmployees())
-            .extracting(Employee::getLastName)
-            .containsExactlyInAnyOrder("Киринюк");
+            .extracting(Employee::getFirstName, Employee::getLastName)
+            .containsExactlyInAnyOrder(Tuple.tuple("Кристина", "Киринюк"));
     }
 
     @Test

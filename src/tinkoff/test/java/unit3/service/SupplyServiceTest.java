@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -49,25 +50,18 @@ public class SupplyServiceTest {
 
         when(dataStorage.getOffice()).thenReturn(CreateEntityHelper.createOfficeAndAddEmployees(employee1, employee2));
 
-        assertThat(service.getAll(employee1.getId()))
-            .hasSize(5)
-            .extracting(SupplyDto::getName)
-            .containsExactlyInAnyOrder("линейка", "ручка", "линейка", "ручка", "блокнот");
+        SupplyDto startRuler = new SupplyDto("линейка", 53.12);
+        SupplyDto startPen = new SupplyDto("ручка", 33.12);
+        SupplyDto startNotebook = new SupplyDto("блокнот", 144.1);
 
         assertThat(service.getAll(employee1.getId()))
             .hasSize(5)
-            .extracting(SupplyDto::getCost)
-            .containsExactlyInAnyOrder(50.5, 30.5, 33.12, 53.12, 144.1);
+            .containsExactlyInAnyOrder(new SupplyDto("линейка", 50.5), new SupplyDto("ручка", 30.5),
+                                       startRuler, startPen, startNotebook);
 
         assertThat(service.getAll(employee2.getId()))
             .hasSize(4)
-            .extracting(SupplyDto::getName)
-            .containsExactlyInAnyOrder("блокнот", "линейка", "ручка", "блокнот");
-
-        assertThat(service.getAll(employee2.getId()))
-            .hasSize(4)
-            .extracting(SupplyDto::getCost)
-            .containsExactlyInAnyOrder(245.7, 33.12, 53.12, 144.1);
+            .containsExactlyInAnyOrder(new SupplyDto("блокнот", 245.7), startRuler, startPen, startNotebook);
     }
 
     @Test
@@ -85,12 +79,12 @@ public class SupplyServiceTest {
 
         assertThat(officeSupplies)
             .hasSize(5)
-            .extracting(OfficeSupply::getName)
-            .containsExactlyInAnyOrder("линейка", "ручка", "блокнот", "линейка", "ручка");
-        assertThat(officeSupplies)
-            .hasSize(5)
-            .extracting(OfficeSupply::getCost)
-            .containsExactlyInAnyOrder(50.5, 30.5, 33.12, 53.12, 144.1);
+            .extracting(OfficeSupply::getName, OfficeSupply::getCost)
+            .containsExactlyInAnyOrder(new Tuple("линейка", 53.12),
+                                       new Tuple("ручка", 33.12),
+                                       new Tuple("блокнот", 144.1),
+                                       new Tuple("линейка", 50.5),
+                                       new Tuple("ручка", 30.5));
     }
 
     @Test

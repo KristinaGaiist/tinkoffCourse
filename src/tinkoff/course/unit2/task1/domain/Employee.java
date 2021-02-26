@@ -32,6 +32,10 @@ public class Employee {
 		return lastName;
 	}
 
+	public boolean isFired() {
+		return fired;
+	}
+
 	public WorkPlace getWorkPlace() {
 		return workPlace;
 	}

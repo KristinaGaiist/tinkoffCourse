@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import unit2.task1.cmd.Messages;
-import unit5.task3.application.ExitService;
+import unit5.task3.application.CommitService;
 import unit5.task3.application.FilmService;
 import unit5.task3.cmd.view.ExitView;
 import unit5.task3.cmd.view.FilmView;
@@ -17,7 +17,7 @@ public class Main {
 
         FilmRepository storage = new FilmRepository();
         FilmView filmView = new FilmView(new FilmService(storage));
-        ExitView exitView = new ExitView(new ExitService(storage));
+        ExitView exitView = new ExitView(new CommitService(storage));
         ShellCommandExecutor commandExecutor = new ShellCommandExecutor(filmView, exitView);
 
         try (InputStream inputStream = System.in;

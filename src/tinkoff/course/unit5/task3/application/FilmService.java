@@ -20,30 +20,31 @@ public class FilmService {
         return storage.getAll();
     }
 
-    public Film getFilmInfo(String filmName) {
+    public Film getFilmInfo(String filmName) throws FilmNotFoundException {
         return StreamSupport.stream(storage.getAll().spliterator(), false)
             .filter(film -> film.getName().equals(filmName))
             .findFirst()
             .orElseThrow(() -> new FilmNotFoundException(filmName));
     }
 
-    public void editFilmName(String oldName, String newName) {
+    public void editFilmName(String oldName, String newName) throws FilmNotFoundException {
         Film film = getFilmInfo(oldName);
         film.setName(newName);
     }
 
-    public void addFilm(String name, Date releaseDate) {
-        StreamSupport.stream(storage.getAll().spliterator(), false)
-            .filter(film -> film.getName().equals(name))
-            .findFirst()
-            .ifPresent(f -> {
-                throw new FilmAlreadyExistException(name);
-            });
+    public void addFilm(String name, Date releaseDate) throws FilmAlreadyExistException {
+        boolean isPresent = StreamSupport.stream(storage.getAll().spliterator(), false)
+            .anyMatch(film -> film.getName().equals(name));
+
+        if (isPresent) {
+            throw new FilmAlreadyExistException(name);
+        }
 
         storage.add(new Film(name, releaseDate));
     }
 
-    public void addActor(String filmName, String actorFirstName, String actorLastName, Date birthDay) {
+    public void addActor(String filmName, String actorFirstName, String actorLastName, Date birthDay)
+        throws FilmNotFoundException {
         Film film = getFilmInfo(filmName);
         film.addActor(new Actor(actorFirstName, actorLastName, birthDay));
     }

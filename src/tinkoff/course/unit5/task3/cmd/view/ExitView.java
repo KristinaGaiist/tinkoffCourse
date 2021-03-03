@@ -1,17 +1,17 @@
 package unit5.task3.cmd.view;
 
-import unit5.task3.application.ExitService;
+import unit5.task3.application.CommitService;
 
 public class ExitView {
 
-    private final ExitService exitService;
+    private final CommitService commitService;
 
-    public ExitView(ExitService exitService) {
-        this.exitService = exitService;
+    public ExitView(CommitService commitService) {
+        this.commitService = commitService;
     }
 
     public void exit() {
-        exitService.exit();
+        commitService.saveChanges();
         System.exit(0);
     }
 }

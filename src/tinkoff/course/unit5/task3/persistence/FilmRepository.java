@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import unit5.task3.JsonStorage;
 import unit5.task3.entity.Film;
+import unit5.task3.exception.ApplicationRuntimeException;
 
 public class FilmRepository implements IFilmRepository {
 
@@ -24,7 +25,7 @@ public class FilmRepository implements IFilmRepository {
         try {
             films = filmJsonStorage.read();
         } catch (IOException e) {
-            throw new RuntimeException("Can't read the file. See inner exception.", e);
+            throw new ApplicationRuntimeException("Невозможно прочитать файл", e);
         }
 
         return films;
@@ -40,7 +41,7 @@ public class FilmRepository implements IFilmRepository {
         try {
             filmJsonStorage.save(films);
         } catch (IOException e) {
-            throw new RuntimeException("Can't save data to file. See inner exception", e);
+            throw new ApplicationRuntimeException("Невозможно сохранить в файл", e);
         }
     }
 }

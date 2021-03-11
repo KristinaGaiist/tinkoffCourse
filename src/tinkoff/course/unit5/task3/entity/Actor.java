@@ -29,6 +29,6 @@ public class Actor {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " " + new SimpleDateFormat("yyyy-MM-dd").format(birthDay) + "\n";
+        return firstName + " " + lastName + " " + new SimpleDateFormat("yyyy-MM-dd").format(birthDay);
     }
 }

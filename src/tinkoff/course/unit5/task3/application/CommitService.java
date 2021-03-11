@@ -1,12 +1,12 @@
 package unit5.task3.application;
 
-import unit5.task3.persistence.IFilmRepository;
+import unit5.task3.persistence.IUnitOfWork;
 
 public class CommitService {
 
-    private final IFilmRepository storage;
+    private final IUnitOfWork storage;
 
-    public CommitService(IFilmRepository storage) {
+    public CommitService(IUnitOfWork storage) {
         this.storage = storage;
     }
 

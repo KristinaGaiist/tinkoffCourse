@@ -16,7 +16,8 @@ public class Task1 {
         Map<JavaKeyword, Long> result = new HashMap<>();
         try {
             byte[] array = getByteArray();
-            JavaKeywordCounter.calculateJavaKeywordsInString(result, new String(array, StandardCharsets.UTF_8));
+            result = JavaKeywordCounter.calculateJavaKeywordsInString(result,
+                                                                      new String(array, StandardCharsets.UTF_8));
             writeFile(result);
         } catch (PublicException e) {
             System.out.println(e.getMessage());
@@ -34,7 +35,8 @@ public class Task1 {
         } catch (FileNotFoundException e) {
             throw new PublicException(ExceptionMessage.FILE_NOT_FOUND);
         } catch (IOException e) {
-            throw new PublicException(ExceptionMessage.ERROR_WITH_READ_FILE, e);
+            throw new PublicException(String.format("%s: %s", ExceptionMessage.ERROR_WITH_READ_FILE, e.getMessage()),
+                                      e);
         }
     }
 
@@ -46,7 +48,8 @@ public class Task1 {
                 outputStream.write(line.getBytes(StandardCharsets.UTF_8));
             }
         } catch (IOException e) {
-            throw new PublicException(ExceptionMessage.ERROR_WITH_WRITE_FILE, e);
+            throw new PublicException(String.format("%s: %s", ExceptionMessage.ERROR_WITH_WRITE_FILE, e.getMessage()),
+                                      e);
         }
     }
 }

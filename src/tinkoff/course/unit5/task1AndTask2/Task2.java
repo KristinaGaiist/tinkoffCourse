@@ -12,9 +12,8 @@ import java.util.Map.Entry;
 public class Task2 {
 
     public static void main(String... args) {
-        Map<JavaKeyword, Long> result = new HashMap<>();
         try {
-            readFileAndCalculateResult(result);
+            Map<JavaKeyword, Long> result = readFileAndCalculateResult();
             writeFile(result);
         } catch (PublicException e) {
             System.out.println(e.getMessage());
@@ -25,22 +24,25 @@ public class Task2 {
         }
     }
 
-    private static void readFileAndCalculateResult(Map<JavaKeyword, Long> result) throws PublicException {
+    private static Map<JavaKeyword, Long> readFileAndCalculateResult() throws PublicException {
+        Map<JavaKeyword, Long> result = new HashMap<>();
         try (FileReader reader = new FileReader(new File("src\\tinkoff\\resources\\java-code"))) {
             int content;
             StringBuilder line = new StringBuilder();
             while ((content = reader.read()) != -1) {
                 if (content == '\r' || content == '\n') {
-                    JavaKeywordCounter.calculateJavaKeywordsInString(result, line.toString());
+                    result = JavaKeywordCounter.calculateJavaKeywordsInString(result, line.toString());
                     line = new StringBuilder();
                 } else {
                     line.append((char) content);
                 }
             }
+            return result;
         } catch (FileNotFoundException e) {
             throw new PublicException(ExceptionMessage.FILE_NOT_FOUND);
         } catch (IOException e) {
-            throw new PublicException(ExceptionMessage.ERROR_WITH_READ_FILE, e);
+            throw new PublicException(String.format("%s: %s", ExceptionMessage.ERROR_WITH_READ_FILE, e.getMessage()),
+                                      e);
         }
     }
 
@@ -50,7 +52,8 @@ public class Task2 {
                 writer.write(entry.getKey() + " " + entry.getValue() + "\n");
             }
         } catch (IOException e) {
-            throw new PublicException(ExceptionMessage.ERROR_WITH_WRITE_FILE, e);
+            throw new PublicException(String.format("%s: %s", ExceptionMessage.ERROR_WITH_WRITE_FILE, e.getMessage()),
+                                      e);
         }
     }
 }

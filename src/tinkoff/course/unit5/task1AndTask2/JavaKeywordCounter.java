@@ -1,15 +1,17 @@
 package unit5.task1AndTask2;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 public class JavaKeywordCounter {
 
-    public static void calculateJavaKeywordsInString(Map<JavaKeyword, Long> result, String stringToCalculate) {
+    public static Map<JavaKeyword, Long> calculateJavaKeywordsInString(Map<JavaKeyword, Long> existingData,
+                                                                       String stringToCalculate) {
         String fileWithoutSpecialSymbols = stringToCalculate
             .replaceAll("[^a-zA-Z0-9]", " ")
             .toUpperCase();
-
+        HashMap<JavaKeyword, Long> result = new HashMap<>(existingData);
         for (JavaKeyword javaKeyword : JavaKeyword.values()) {
             long javaKeywordCount = Pattern.compile(javaKeyword.name())
                 .splitAsStream(fileWithoutSpecialSymbols)
@@ -22,5 +24,6 @@ public class JavaKeywordCounter {
             }
             result.put(javaKeyword, javaKeywordCount);
         }
+        return result;
     }
 }

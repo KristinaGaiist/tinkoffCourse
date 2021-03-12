@@ -7,6 +7,4 @@ public interface IFilmRepository {
     Iterable<Film> getAll();
 
     void add(Film film);
-
-    void save();
 }

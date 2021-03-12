@@ -6,7 +6,7 @@ import unit5.task3.JsonStorage;
 import unit5.task3.entity.Film;
 import unit5.task3.exception.ApplicationRuntimeException;
 
-public class FilmRepository implements IFilmRepository {
+public class FilmRepository implements IFilmRepository, IUnitOfWork {
 
     private final JsonStorage filmJsonStorage;
     private List<Film> films;

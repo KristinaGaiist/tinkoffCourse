@@ -44,6 +44,6 @@ public class Film implements Serializable {
 
     @Override
     public String toString() {
-        return name + " " + new SimpleDateFormat("yyyy-MM-dd").format(releaseDate) + " " + actors.toString() + "\n";
+        return name + " " + new SimpleDateFormat("yyyy-MM-dd").format(releaseDate) + " " + actors.toString();
     }
 }

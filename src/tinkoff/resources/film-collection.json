@@ -1,0 +1,379 @@
+[
+  {
+    "name": "X-Men",
+    "releaseDate": "2000-06-14",
+    "actors": [
+      {
+        "firstName": "Patrick",
+        "lastName": "Stewart",
+        "birthDay": "1940-06-13"
+      },
+      {
+        "firstName": "Hugh",
+        "lastName": "Jackman",
+        "birthDay": "1968-09-02"
+      },
+      {
+        "firstName": "Ian",
+        "lastName": "McKellen",
+        "birthDay": "1939-04-25"
+      },
+      {
+        "firstName": "Halle",
+        "lastName": "Berry",
+        "birthDay": "1966-07-14"
+      },
+      {
+        "firstName": "Anna",
+        "lastName": "Paquin",
+        "birthDay": "1982-06-24"
+      },
+      {
+        "firstName": "Bruce",
+        "lastName": "Davison",
+        "birthDay": "1946-05-28"
+      },
+      {
+        "firstName": "Famke",
+        "lastName": "Janssen",
+        "birthDay": "1964-10-05"
+      },
+      {
+        "firstName": "James",
+        "lastName": "Marsden",
+        "birthDay": "1973-08-18"
+      },
+      {
+        "firstName": "Rebecca",
+        "lastName": "Romijn-Stamos",
+        "birthDay": "1972-10-06"
+      },
+      {
+        "firstName": "Ray",
+        "lastName": "Park",
+        "birthDay": "1974-07-23"
+      }
+    ]
+  },
+  {
+    "name": "X2: X-Men United",
+    "releaseDate": "2003-04-02",
+    "actors": [
+      {
+        "firstName": "Patrick",
+        "lastName": "Stewart",
+        "birthDay": "1940-06-13"
+      },
+      {
+        "firstName": "Hugh",
+        "lastName": "Jackman",
+        "birthDay": "1968-09-12"
+      },
+      {
+        "firstName": "Ian",
+        "lastName": "McKellen",
+        "birthDay": "1939-04-25"
+      },
+      {
+        "firstName": "Halle",
+        "lastName": "Berry",
+        "birthDay": "1966-07-14"
+      },
+      {
+        "firstName": "Anna",
+        "lastName": "Paquin",
+        "birthDay": "1982-06-24"
+      },
+      {
+        "firstName": "Bruce",
+        "lastName": "Davison",
+        "birthDay": "1946-05-28"
+      },
+      {
+        "firstName": "Famke",
+        "lastName": "Janssen",
+        "birthDay": "1964-10-05"
+      },
+      {
+        "firstName": "James",
+        "lastName": "Marsden",
+        "birthDay": "1973-08-18"
+      },
+      {
+        "firstName": "Rebecca",
+        "lastName": "Romijn-Stamos",
+        "birthDay": "1972-10-06"
+      },
+      {
+        "firstName": "Brian",
+        "lastName": "Cox",
+        "birthDay": "1946-05-01"
+      },
+      {
+        "firstName": "Alan",
+        "lastName": "Cumming",
+        "birthDay": "1965-12-27"
+      }
+    ]
+  },
+  {
+    "name": "X-Men: The Last Stand",
+    "releaseDate": "2006-04-26",
+    "actors": [
+      {
+        "firstName": "Patrick",
+        "lastName": "Stewart",
+        "birthDay": "1940-06-13"
+      },
+      {
+        "firstName": "Hugh",
+        "lastName": "Jackman",
+        "birthDay": "1968-09-12"
+      },
+      {
+        "firstName": "Ian",
+        "lastName": "McKellen",
+        "birthDay": "1939-04-25"
+      },
+      {
+        "firstName": "Halle",
+        "lastName": "Berry",
+        "birthDay": "1966-07-14"
+      },
+      {
+        "firstName": "Anna",
+        "lastName": "Paquin",
+        "birthDay": "1982-06-24"
+      },
+      {
+        "firstName": "Famke",
+        "lastName": "Janssen",
+        "birthDay": "1964-10-05"
+      },
+      {
+        "firstName": "James",
+        "lastName": "Marsden",
+        "birthDay": "1973-08-18"
+      },
+      {
+        "firstName": "Rebecca",
+        "lastName": "Romijn-Stamos",
+        "birthDay": "1972-10-06"
+      },
+      {
+        "firstName": "Kelsey",
+        "lastName": "Grammer",
+        "birthDay": "1955-01-21"
+      },
+      {
+        "firstName": "Shawn",
+        "lastName": "Ashmore",
+        "birthDay": "1979-09-07"
+      },
+      {
+        "firstName": "Aaron",
+        "lastName": "Stanford",
+        "birthDay": "1976-11-27"
+      },
+      {
+        "firstName": "Vinnie",
+        "lastName": "Jones",
+        "birthDay": "1965-12-05"
+      }
+    ]
+  },
+  {
+    "name": "X-Men: First Class",
+    "releaseDate": "2011-05-03",
+    "actors": [
+      {
+        "firstName": "James",
+        "lastName": "McAvoy",
+        "birthDay": "1979-03-21"
+      },
+      {
+        "firstName": "Michael",
+        "lastName": "Fassbender",
+        "birthDay": "1977-03-02"
+      },
+      {
+        "firstName": "Rose",
+        "lastName": "Byrne",
+        "birthDay": "1979-06-24"
+      },
+      {
+        "firstName": "January",
+        "lastName": "Jones",
+        "birthDay": "1978-12-05"
+      },
+      {
+        "firstName": "Oliver",
+        "lastName": "Platt",
+        "birthDay": "1960-12-12"
+      },
+      {
+        "firstName": "Kevin",
+        "lastName": "Bacon",
+        "birthDay": "1958-06-08"
+      }
+    ]
+  },
+  {
+    "name": "X-Men: Days of Future Past",
+    "releaseDate": "2014-04-24",
+    "actors": [
+      {
+        "firstName": "Patrick",
+        "lastName": "Stewart",
+        "birthDay": "1940-06-13"
+      },
+      {
+        "firstName": "Hugh",
+        "lastName": "Jackman",
+        "birthDay": "1968-09-12"
+      },
+      {
+        "firstName": "Ian",
+        "lastName": "McKellen",
+        "birthDay": "1939-04-25"
+      },
+      {
+        "firstName": "Halle",
+        "lastName": "Berry",
+        "birthDay": "1966-07-14"
+      },
+      {
+        "firstName": "Anna",
+        "lastName": "Paquin",
+        "birthDay": "1982-06-24"
+      },
+      {
+        "firstName": "James",
+        "lastName": "McAvoy",
+        "birthDay": "1979-03-21"
+      },
+      {
+        "firstName": "Michael",
+        "lastName": "Fassbender",
+        "birthDay": "1977-03-02"
+      },
+      {
+        "firstName": "Jennifer",
+        "lastName": "Lawrence",
+        "birthDay": "1990-07-15"
+      },
+      {
+        "firstName": "Elliot",
+        "lastName": "Page",
+        "birthDay": "1987-01-21"
+      },
+      {
+        "firstName": "Peter",
+        "lastName": "Dinklage",
+        "birthDay": "1969-05-11"
+      }
+    ]
+  },
+  {
+    "name": "X-Men: Apocalypse",
+    "releaseDate": "2016-04-27",
+    "actors": [
+      {
+        "firstName": "James",
+        "lastName": "McAvoy",
+        "birthDay": "1979-03-21"
+      },
+      {
+        "firstName": "Michael",
+        "lastName": "Fassbender",
+        "birthDay": "1977-03-02"
+      },
+      {
+        "firstName": "Jennifer",
+        "lastName": "Lawrence",
+        "birthDay": "1990-07-15"
+      },
+      {
+        "firstName": "Rose",
+        "lastName": "Byrne",
+        "birthDay": "1979-06-24"
+      },
+      {
+        "firstName": "Nicholas",
+        "lastName": "Hoult",
+        "birthDay": "1989-11-07"
+      },
+      {
+        "firstName": "Tye",
+        "lastName": "Sheridan",
+        "birthDay": "1996-10-11"
+      },
+      {
+        "firstName": "Sophie",
+        "lastName": "Turner",
+        "birthDay": "1996-01-21"
+      },
+      {
+        "firstName": "Oscar",
+        "lastName": "Isaac",
+        "birthDay": "1979-02-09"
+      },
+      {
+        "firstName": "Olivia",
+        "lastName": "Munn",
+        "birthDay": "1980-06-03"
+      },
+      {
+        "firstName": "Lucas",
+        "lastName": "Till",
+        "birthDay": "1990-07-10"
+      }
+    ]
+  },
+  {
+    "name": "X-Men: Dark Phoenix",
+    "releaseDate": "2019-05-07",
+    "actors": [
+      {
+        "firstName": "James",
+        "lastName": "McAvoy",
+        "birthDay": "1979-03-21"
+      },
+      {
+        "firstName": "Michael",
+        "lastName": "Fassbender",
+        "birthDay": "1977-03-02"
+      },
+      {
+        "firstName": "Jennifer",
+        "lastName": "Lawrence",
+        "birthDay": "1990-07-15"
+      },
+      {
+        "firstName": "Nicholas",
+        "lastName": "Hoult",
+        "birthDay": "1989-11-07"
+      },
+      {
+        "firstName": "Tye",
+        "lastName": "Sheridan",
+        "birthDay": "1996-10-11"
+      },
+      {
+        "firstName": "Sophie",
+        "lastName": "Turner",
+        "birthDay": "1996-01-21"
+      },
+      {
+        "firstName": "Alexandra",
+        "lastName": "Shipp",
+        "birthDay": "1991-06-16"
+      },
+      {
+        "firstName": "Jessica",
+        "lastName": "Chastain",
+        "birthDay": "1977-02-24"
+      }
+    ]
+  }
+]

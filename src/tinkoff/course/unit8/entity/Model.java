@@ -25,7 +25,7 @@ import lombok.Setter;
 public class Model {
 
     @Id
-    @SequenceGenerator(name = "models_seq", sequenceName = "models_seq")
+    @SequenceGenerator(name = "models_seq", sequenceName = "models_seq", allocationSize = 1)
     @GeneratedValue(generator = "models_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
 

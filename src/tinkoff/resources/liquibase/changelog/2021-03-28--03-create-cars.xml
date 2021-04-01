@@ -5,7 +5,7 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
   <changeSet author="k.kirinyuk" id="2021-03-28--03-create-cars">
-    <createSequence incrementBy="50" sequenceName="cars_seq" startValue="100"/>
+    <createSequence incrementBy="1" sequenceName="cars_seq" startValue="1"/>
 
     <createTable tableName="cars">
       <column name="id" type="integer">

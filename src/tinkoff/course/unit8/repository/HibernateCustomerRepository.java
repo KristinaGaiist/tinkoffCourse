@@ -18,144 +18,178 @@ public class HibernateCustomerRepository implements CustomerRepository {
 
     @Override
     public void add(Customer customer) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        session.save(customer);
-        transaction.commit();
-        session.close();
+            session.save(customer);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public List<Customer> findAll() {
-        Session session = this.sessionFactory.openSession();
-        List<Customer> customers = session.createQuery("SELECT C FROM Customer C", Customer.class).getResultList();
-        session.close();
-
-        return customers;
+        try (Session session = this.sessionFactory.openSession()) {
+            return session.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
+        }
     }
 
     @Override
     public Optional<Customer> findByFullName(String firstName, String lastName, String middleName) {
-        Session session = this.sessionFactory.openSession();
-        List<Customer> customers = session.createQuery("SELECT C FROM Customer C WHERE C.lastName =: lastName "
-                                                           + "and C.firstName =: firstName and C.middleName =: "
-                                                           + "middleName")
-            .setParameter("firstName", firstName)
-            .setParameter("lastName", lastName)
-            .setParameter("middleName", middleName)
-            .list();
-        session.close();
-
-        return customers.stream().findFirst();
+        try (Session session = this.sessionFactory.openSession()) {
+            return session.createQuery("SELECT c FROM Customer c WHERE c.lastName =: lastName "
+                                           + "and c.firstName =: firstName and c.middleName =: "
+                                           + "middleName")
+                .setParameter("firstName", firstName)
+                .setParameter("lastName", lastName)
+                .setParameter("middleName", middleName)
+                .list()
+                .stream()
+                .findFirst();
+        }
     }
 
     @Override
     public Optional<Customer> findById(long id) {
-        Session session = this.sessionFactory.openSession();
-        List<Customer> customers = session.createQuery("SELECT C FROM Customer C WHERE C.id =: id")
-            .setParameter("id", id)
-            .list();
-        session.close();
-
-        return customers.stream().findFirst();
+        try (Session session = this.sessionFactory.openSession()) {
+            return session.createQuery("SELECT c FROM Customer c WHERE c.id =: id")
+                .setParameter("id", id)
+                .list()
+                .stream()
+                .findFirst();
+        }
     }
 
     @Override
     public List<Customer> findCustomersByCarBrand(String brandName) {
-        Session session = this.sessionFactory.openSession();
-        List<Customer> result = session
-            .createQuery("SELECT C FROM Customer C "
-                             + "JOIN C.cars car "
-                             + "WHERE car.model.brand.name =: brandName")
-            .setParameter("brandName", brandName)
-            .list();
-        session.close();
-
-        return result;
+        try (Session session = this.sessionFactory.openSession()) {
+            return session
+                .createQuery("SELECT c FROM Customer c "
+                                 + "JOIN c.cars car "
+                                 + "WHERE car.model.brand.name =: brandName")
+                .setParameter("brandName", brandName)
+                .list();
+        }
     }
 
     @Override
     public List<Customer> findCustomersByCarModel(String model) {
-        Session session = this.sessionFactory.openSession();
-        List<Customer> result = session
-            .createQuery("SELECT C FROM Customer C "
-                             + "JOIN C.cars car "
-                             + "WHERE car.model.model =: model")
-            .setParameter("model", model)
-            .list();
-        session.close();
+        try (Session session = this.sessionFactory.openSession()) {
+            return session
+                .createQuery("SELECT c FROM Customer c "
+                                 + "JOIN c.cars car "
+                                 + "WHERE car.model.model =: model")
+                .setParameter("model", model)
+                .list();
+        }
+    }
 
-        return result;
+    @Override
+    public boolean existsById(long id) {
+        try (Session session = this.sessionFactory.openSession()) {
+            long count = (long) session.createQuery("SELECT COUNT(c.id) FROM Customer c WHERE c.id =: id")
+                .setParameter("id", id)
+                .uniqueResult();
+            return count != 0;
+        }
     }
 
     @Override
     public void updateFirstName(long id, String newFirstName) {
-        Session session = this.sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        session.createQuery("UPDATE Customer SET firstName =: newFirstName WHERE id =: id")
-            .setParameter("newFirstName", newFirstName)
-            .setParameter("id", id)
-            .executeUpdate();
+            session.createQuery("UPDATE Customer SET firstName =: newFirstName WHERE id =: id")
+                .setParameter("newFirstName", newFirstName)
+                .setParameter("id", id)
+                .executeUpdate();
 
-        transaction.commit();
-        session.close();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public void addCustomerCar(long customerId, long carId) {
-        Session session = this.sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        Car car = (Car) session.createQuery("SELECT C FROM Car C WHERE C.id =: carId")
-            .setParameter("carId", carId)
-            .list()
-            .stream()
-            .findFirst()
-            .get();
+            Car car = (Car) session.createQuery("SELECT c FROM Car c WHERE c.id =: carId")
+                .setParameter("carId", carId)
+                .list()
+                .stream()
+                .findFirst()
+                .get();
 
-        Customer customer = (Customer) session.createQuery("SELECT C FROM Customer C WHERE C.id =: customerId")
-            .setParameter("customerId", customerId)
-            .list()
-            .stream()
-            .findFirst()
-            .get();
-        customer.getCars().add(car);
+            Customer customer = (Customer) session.createQuery("SELECT c FROM Customer c WHERE c.id =: customerId")
+                .setParameter("customerId", customerId)
+                .list()
+                .stream()
+                .findFirst()
+                .get();
+            customer.getCars().add(car);
 
-        session.save(customer);
-        transaction.commit();
-        session.close();
+            session.save(customer);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public void delete(long id) {
-        Session session = this.sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        session.createQuery("DELETE FROM Customer WHERE id =: id")
-            .setParameter("id", id)
-            .executeUpdate();
+            session.createQuery("DELETE FROM Customer WHERE id =: id")
+                .setParameter("id", id)
+                .executeUpdate();
 
-        transaction.commit();
-        session.close();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public void deleteCustomerCar(long customerId, Car car) {
-        Session session = this.sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        Customer customer = (Customer) session.createQuery("SELECT C FROM Customer C WHERE C.id =: customerId")
-            .setParameter("customerId", customerId)
-            .list()
-            .stream()
-            .findFirst()
-            .get();
-        customer.getCars().remove(car);
+            Customer customer = (Customer) session.createQuery("SELECT c FROM Customer c WHERE c.id =: customerId")
+                .setParameter("customerId", customerId)
+                .list()
+                .stream()
+                .findFirst()
+                .get();
+            customer.getCars().remove(car);
 
-        session.save(customer);
-        transaction.commit();
-        session.close();
+            session.save(customer);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 }

@@ -34,7 +34,7 @@ public class Customer {
     )
     Set<Car> cars = new HashSet<Car>();
     @Id
-    @SequenceGenerator(name = "customers_seq", sequenceName = "customers_seq")
+    @SequenceGenerator(name = "customers_seq", sequenceName = "customers_seq", allocationSize = 1)
     @GeneratedValue(generator = "customers_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(name = "first_name")

@@ -10,9 +10,13 @@ public interface CarRepository {
 
     List<Car> findAll();
 
-    Optional<Car> findByStateNumber(String model);
+    Optional<Car> findByStateNumber(String stateNumber);
 
     Optional<Car> findById(long id);
+
+    boolean existsByStateNumber(String stateNumber);
+
+    boolean existsByStateNumber(String stateNumber, long excludeId);
 
     void updateStateNumber(long id, String newStateNumber);
 

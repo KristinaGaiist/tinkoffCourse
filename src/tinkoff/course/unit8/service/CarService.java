@@ -1,7 +1,6 @@
 package unit8.service;
 
 import java.util.List;
-import java.util.Objects;
 import unit8.data.Message;
 import unit8.entity.Car;
 import unit8.entity.Model;
@@ -21,7 +20,8 @@ public class CarService {
     }
 
     public Car getCar(String stateNumber) {
-        return getCarByStateNumberWithValidation(stateNumber);
+        return carRepository.findByStateNumber(stateNumber)
+            .orElseThrow(() -> new ValidationException(Message.CAR_DOES_NOT_EXIST));
     }
 
     public Car getCarById(long id) {
@@ -30,10 +30,9 @@ public class CarService {
     }
 
     public void createCar(String stateNumber, Model model) {
-        carRepository.findByStateNumber(stateNumber)
-            .ifPresent(Model -> {
-                throw new ValidationException(Message.CAR_ALREADY_EXIST);
-            });
+        if (carRepository.existsByStateNumber(stateNumber)) {
+            throw new ValidationException(Message.CAR_ALREADY_EXIST);
+        }
 
         Car car = new Car();
         car.setModel(model);
@@ -42,24 +41,20 @@ public class CarService {
         carRepository.add(car);
     }
 
-    public void updateStateNumber(String oldModel, String newStateNumber) {
-        Car car = getCarByStateNumberWithValidation(oldModel);
-        carRepository.findByStateNumber(newStateNumber)
-            .ifPresent(c -> {
-                if (!Objects.equals(c.getId(), car.getId())) {
-                    throw new ValidationException(Message.CAR_ALREADY_EXIST);
-                }
-            });
+    public void updateStateNumber(String oldStateNumber, String newStateNumber) {
+        Car car = carRepository.findByStateNumber(oldStateNumber)
+            .orElseThrow(() -> new ValidationException(Message.CAR_DOES_NOT_EXIST));
+        if (carRepository.existsByStateNumber(newStateNumber, car.getId())) {
+            throw new ValidationException(Message.CAR_ALREADY_EXIST);
+        }
+
         carRepository.updateStateNumber(car.getId(), newStateNumber);
     }
 
     public void deleteByStateNumber(String stateNumber) {
-        getCarByStateNumberWithValidation(stateNumber);
+        if (!carRepository.existsByStateNumber(stateNumber)) {
+            throw new ValidationException(Message.CAR_DOES_NOT_EXIST);
+        }
         carRepository.deleteByStateNumber(stateNumber);
-    }
-
-    private Car getCarByStateNumberWithValidation(String stateNumber) {
-        return carRepository.findByStateNumber(stateNumber)
-            .orElseThrow(() -> new ValidationException(Message.CAR_DOES_NOT_EXIST));
     }
 }

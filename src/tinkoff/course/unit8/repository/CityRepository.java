@@ -14,6 +14,10 @@ public interface CityRepository {
 
     Optional<City> findById(long id);
 
+    boolean existByName(String name);
+
+    boolean existsByName(String name, long excludeId);
+
     void updateCity(long id, String newName);
 
     void deleteCityByName(String cityName);

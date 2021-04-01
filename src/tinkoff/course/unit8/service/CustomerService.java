@@ -34,7 +34,8 @@ public class CustomerService {
     }
 
     public Customer getCustomerById(long id) {
-        return getCustomerByIdWithValidation(id);
+        return customerRepository.findById(id)
+            .orElseThrow(() -> new ValidationException(Message.CUSTOMER_DOES_NOT_EXIST));
     }
 
     public void createCustomer(String firstName, String lastName, String middleName, City city) {
@@ -48,32 +49,35 @@ public class CustomerService {
     }
 
     public void addCustomerCar(long customerId, long carId) {
-        getCustomerByIdWithValidation(customerId);
+        if (!customerRepository.existsById(customerId)) {
+            throw new ValidationException(Message.CUSTOMER_DOES_NOT_EXIST);
+        }
         carRepository.findById(carId)
             .orElseThrow(() -> new ValidationException(Message.CAR_DOES_NOT_EXIST));
         customerRepository.addCustomerCar(customerId, carId);
     }
 
     public void updateFirstName(long id, String newFirstName) {
-        getCustomerByIdWithValidation(id);
+        if (!customerRepository.existsById(id)) {
+            throw new ValidationException(Message.CUSTOMER_DOES_NOT_EXIST);
+        }
         customerRepository.updateFirstName(id, newFirstName);
     }
 
     public void deleteById(long id) {
-        getCustomerByIdWithValidation(id);
+        if (!customerRepository.existsById(id)) {
+            throw new ValidationException(Message.CUSTOMER_DOES_NOT_EXIST);
+        }
         customerRepository.delete(id);
     }
 
     public void deleteCustomerCar(long customerId, Car car) {
-        Customer customer = getCustomerByIdWithValidation(customerId);
+        Customer customer = customerRepository.findById(customerId)
+            .orElseThrow(() -> new ValidationException(Message.CUSTOMER_DOES_NOT_EXIST));
         if (customer.getCars().stream().noneMatch(c -> Objects.equals(c.getId(), car.getId()))) {
             throw new ValidationException(Message.CAR_DOES_NOT_BELONG_TO_CUSTOMER);
         }
-        customerRepository.deleteCustomerCar(customerId, car);
-    }
 
-    private Customer getCustomerByIdWithValidation(long id) {
-        return customerRepository.findById(id)
-            .orElseThrow(() -> new ValidationException(Message.CUSTOMER_DOES_NOT_EXIST));
+        customerRepository.deleteCustomerCar(customerId, car);
     }
 }

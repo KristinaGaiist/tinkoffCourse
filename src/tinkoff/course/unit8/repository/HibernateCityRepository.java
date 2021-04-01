@@ -17,72 +17,112 @@ public class HibernateCityRepository implements CityRepository {
 
     @Override
     public void addCity(String cityName) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        City city = new City();
-        city.setName(cityName);
+            City city = new City();
+            city.setName(cityName);
 
-        session.save(city);
-        transaction.commit();
-        session.close();
+            session.save(city);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public List<City> findAllCities() {
-        Session session = this.sessionFactory.openSession();
-        List<City> cities = session.createQuery("SELECT C FROM City C", City.class).getResultList();
-        session.close();
-
-        return cities;
+        try (Session session = this.sessionFactory.openSession()) {
+            return session.createQuery("SELECT c FROM City c", City.class).getResultList();
+        }
     }
 
     @Override
     public Optional<City> findByName(String cityName) {
-        Session session = this.sessionFactory.openSession();
-        List<City> cities = session.createQuery("SELECT C FROM City C WHERE C.name =: cityName")
-            .setParameter("cityName", cityName)
-            .list();
-        session.close();
-
-        return cities.stream().findFirst();
+        try (Session session = this.sessionFactory.openSession()) {
+            return session.createQuery("SELECT c FROM City c WHERE c.name =: cityName")
+                .setParameter("cityName", cityName)
+                .list()
+                .stream()
+                .findFirst();
+        }
     }
 
     @Override
     public Optional<City> findById(long id) {
-        Session session = this.sessionFactory.openSession();
-        List<City> cities = session.createQuery("SELECT C FROM City C WHERE C.id =: id")
-            .setParameter("id", id)
-            .list();
-        session.close();
+        try (Session session = this.sessionFactory.openSession()) {
+            return session.createQuery("SELECT c FROM City c WHERE c.id =: id")
+                .setParameter("id", id)
+                .list()
+                .stream()
+                .findFirst();
+        }
+    }
 
-        return cities.stream().findFirst();
+    @Override
+    public boolean existByName(String name) {
+        try (Session session = this.sessionFactory.openSession()) {
+            long count = (long) session.createQuery("SELECT COUNT(c.id) FROM City c WHERE c.name =: name")
+                .setParameter("name", name)
+                .uniqueResult();
+
+            return count != 0;
+        }
+    }
+
+    @Override
+    public boolean existsByName(String name, long excludeId) {
+        try (Session session = this.sessionFactory.openSession()) {
+            long count = (long) session.createQuery("SELECT COUNT(c.id) FROM City c "
+                                                        + "WHERE c.name =: name and c.id !=: excludeId")
+                .setParameter("name", name)
+                .setParameter("excludeId", excludeId)
+                .uniqueResult();
+
+            return count != 0;
+        }
     }
 
     @Override
     public void updateCity(long id, String newName) {
-        Session session = this.sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        session.createQuery("UPDATE City SET name =: newName WHERE id =: id")
-            .setParameter("newName", newName)
-            .setParameter("id", id)
-            .executeUpdate();
+            session.createQuery("UPDATE City SET name =: newName WHERE id =: id")
+                .setParameter("newName", newName)
+                .setParameter("id", id)
+                .executeUpdate();
 
-        transaction.commit();
-        session.close();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public void deleteCityByName(String cityName) {
-        Session session = this.sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        session.createQuery("DELETE FROM City WHERE name =: cityName")
-            .setParameter("cityName", cityName)
-            .executeUpdate();
+            session.createQuery("DELETE FROM City WHERE name =: cityName")
+                .setParameter("cityName", cityName)
+                .executeUpdate();
 
-        transaction.commit();
-        session.close();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 }

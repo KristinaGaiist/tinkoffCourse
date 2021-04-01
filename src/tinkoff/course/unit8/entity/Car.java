@@ -27,7 +27,7 @@ import lombok.Setter;
 public class Car implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "cars_seq", sequenceName = "cars_seq")
+    @SequenceGenerator(name = "cars_seq", sequenceName = "cars_seq", allocationSize = 1)
     @GeneratedValue(generator = "cars_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
 

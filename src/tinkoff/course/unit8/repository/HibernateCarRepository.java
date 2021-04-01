@@ -17,69 +17,109 @@ public class HibernateCarRepository implements CarRepository {
 
     @Override
     public void add(Car car) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        session.save(car);
-        transaction.commit();
-        session.close();
+            session.save(car);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public List<Car> findAll() {
-        Session session = this.sessionFactory.openSession();
-        List<Car> cars = session.createQuery("SELECT C FROM Car C", Car.class).getResultList();
-        session.close();
-
-        return cars;
+        try (Session session = this.sessionFactory.openSession()) {
+            return session.createQuery("SELECT c FROM Car c", Car.class).getResultList();
+        }
     }
 
     @Override
     public Optional<Car> findByStateNumber(String stateNumber) {
-        Session session = this.sessionFactory.openSession();
-        List<Car> cars = session.createQuery("SELECT C FROM Car C WHERE C.stateNumber =: stateNumber")
-            .setParameter("stateNumber", stateNumber)
-            .list();
-        session.close();
-
-        return cars.stream().findFirst();
+        try (Session session = this.sessionFactory.openSession()) {
+            return session.createQuery("SELECT c FROM Car c WHERE c.stateNumber =: stateNumber")
+                .setParameter("stateNumber", stateNumber)
+                .list()
+                .stream()
+                .findFirst();
+        }
     }
 
     @Override
     public Optional<Car> findById(long id) {
-        Session session = this.sessionFactory.openSession();
-        List<Car> cars = session.createQuery("SELECT C FROM Car C WHERE C.id =: id")
-            .setParameter("id", id)
-            .list();
-        session.close();
+        try (Session session = this.sessionFactory.openSession()) {
+            return session.createQuery("SELECT c FROM Car c WHERE c.id =: id")
+                .setParameter("id", id)
+                .list()
+                .stream()
+                .findFirst();
+        }
+    }
 
-        return cars.stream().findFirst();
+    @Override
+    public boolean existsByStateNumber(String stateNumber) {
+        try (Session session = this.sessionFactory.openSession()) {
+            long count = (long) session.createQuery("SELECT COUNT(c.id) FROM Car c WHERE c.stateNumber =: stateNumber")
+                .setParameter("stateNumber", stateNumber)
+                .uniqueResult();
+
+            return count != 0;
+        }
+    }
+
+    @Override
+    public boolean existsByStateNumber(String stateNumber, long excludeId) {
+        try (Session session = this.sessionFactory.openSession()) {
+            long count = (long) session.createQuery("SELECT COUNT(c.id) FROM Car c "
+                                                        + "WHERE c.stateNumber =: stateNumber and c.id !=: excludeId")
+                .setParameter("stateNumber", stateNumber)
+                .setParameter("excludeId", excludeId)
+                .uniqueResult();
+
+            return count != 0;
+        }
     }
 
     @Override
     public void updateStateNumber(long id, String newStateNumber) {
-        Session session = this.sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        session.createQuery("UPDATE Car SET stateNumber =: newStateNumber WHERE id =: id")
-            .setParameter("newStateNumber", newStateNumber)
-            .setParameter("id", id)
-            .executeUpdate();
+            session.createQuery("UPDATE Car SET stateNumber =: newStateNumber WHERE id =: id")
+                .setParameter("newStateNumber", newStateNumber)
+                .setParameter("id", id)
+                .executeUpdate();
 
-        transaction.commit();
-        session.close();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public void deleteByStateNumber(String stateNumber) {
-        Session session = this.sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        session.createQuery("DELETE FROM Car WHERE stateNumber =: stateNumber")
-            .setParameter("stateNumber", stateNumber)
-            .executeUpdate();
+            session.createQuery("DELETE FROM Car WHERE stateNumber =: stateNumber")
+                .setParameter("stateNumber", stateNumber)
+                .executeUpdate();
 
-        transaction.commit();
-        session.close();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 }

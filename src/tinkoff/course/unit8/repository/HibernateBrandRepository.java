@@ -17,72 +17,112 @@ public class HibernateBrandRepository implements BrandRepository {
 
     @Override
     public void addBrand(String brandName) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        Brand brand = new Brand();
-        brand.setName(brandName);
+            Brand brand = new Brand();
+            brand.setName(brandName);
 
-        session.save(brand);
-        transaction.commit();
-        session.close();
+            session.save(brand);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public List<Brand> findAllBrands() {
-        Session session = this.sessionFactory.openSession();
-        List<Brand> brands = session.createQuery("SELECT B FROM Brand B", Brand.class).getResultList();
-        session.close();
-
-        return brands;
+        try (Session session = this.sessionFactory.openSession()) {
+            return session.createQuery("SELECT b FROM Brand b", Brand.class).getResultList();
+        }
     }
 
     @Override
     public Optional<Brand> findByName(String brandName) {
-        Session session = this.sessionFactory.openSession();
-        List<Brand> brands = session.createQuery("SELECT B FROM Brand B WHERE B.name =: brandName")
-            .setParameter("brandName", brandName)
-            .list();
-        session.close();
-
-        return brands.stream().findFirst();
+        try (Session session = this.sessionFactory.openSession()) {
+            return session.createQuery("SELECT b FROM Brand b WHERE b.name =: brandName")
+                .setParameter("brandName", brandName)
+                .list()
+                .stream()
+                .findFirst();
+        }
     }
 
     @Override
     public Optional<Brand> findById(long id) {
-        Session session = this.sessionFactory.openSession();
-        List<Brand> brands = session.createQuery("SELECT B FROM Brand B WHERE B.id =: id")
-            .setParameter("id", id)
-            .list();
-        session.close();
+        try (Session session = this.sessionFactory.openSession()) {
+            return session.createQuery("SELECT b FROM Brand b WHERE b.id =: id")
+                .setParameter("id", id)
+                .list()
+                .stream()
+                .findFirst();
+        }
+    }
 
-        return brands.stream().findFirst();
+    @Override
+    public boolean existsByName(String name) {
+        try (Session session = this.sessionFactory.openSession()) {
+            long count = (long) session.createQuery("SELECT COUNT(b.id) FROM Brand b WHERE b.name =: name")
+                .setParameter("name", name)
+                .uniqueResult();
+
+            return count != 0;
+        }
+    }
+
+    @Override
+    public boolean existsByName(String name, long excludeId) {
+        try (Session session = this.sessionFactory.openSession()) {
+            long count = (long) session.createQuery("SELECT COUNT(b.id) FROM Brand b "
+                                                        + "WHERE b.name =: name and b.id !=: excludeId")
+                .setParameter("name", name)
+                .setParameter("excludeId", excludeId)
+                .uniqueResult();
+
+            return count != 0;
+        }
     }
 
     @Override
     public void updateBrand(long id, String newName) {
-        Session session = this.sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        session.createQuery("UPDATE Brand SET name =: newName WHERE id =: id")
-            .setParameter("newName", newName)
-            .setParameter("id", id)
-            .executeUpdate();
+            session.createQuery("UPDATE Brand SET name =: newName WHERE id =: id")
+                .setParameter("newName", newName)
+                .setParameter("id", id)
+                .executeUpdate();
 
-        transaction.commit();
-        session.close();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public void deleteBrandByName(String brandName) {
-        Session session = this.sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = this.sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
 
-        session.createQuery("DELETE FROM Brand WHERE name =: brandName")
-            .setParameter("brandName", brandName)
-            .executeUpdate();
+            session.createQuery("DELETE FROM Brand WHERE name =: brandName")
+                .setParameter("brandName", brandName)
+                .executeUpdate();
 
-        transaction.commit();
-        session.close();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 }

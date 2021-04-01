@@ -12,6 +12,10 @@ public interface ModelRepository {
 
     Optional<Model> findByModel(String model);
 
+    boolean existsByModel(String model);
+
+    boolean existsByModel(String model, long excludeId);
+
     Optional<Model> findById(long id);
 
     void updateModel(long id, String newModel);

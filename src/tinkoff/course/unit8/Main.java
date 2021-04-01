@@ -32,11 +32,11 @@ public class Main {
         car();
         customer();
 
-        CUSTOMER_SERVICE.addCustomerCar(51, 52);
+        CUSTOMER_SERVICE.addCustomerCar(1, 2);
         System.out.println(CUSTOMER_SERVICE.getCustomersByCarBrand("BMW"));
-        System.out.println(CUSTOMER_SERVICE.getCustomerById(51).getCars());
-        CUSTOMER_SERVICE.deleteCustomerCar(51, CAR_SERVICE.getCar("n675jd"));
-        System.out.println(CUSTOMER_SERVICE.getCustomerById(51).getCars());
+        System.out.println(CUSTOMER_SERVICE.getCustomerById(1).getCars());
+        CUSTOMER_SERVICE.deleteCustomerCar(1, CAR_SERVICE.getCar("n675jd"));
+        System.out.println(CUSTOMER_SERVICE.getCustomerById(1).getCars());
     }
 
     private static void brand() {
@@ -121,9 +121,9 @@ public class Main {
         CUSTOMER_SERVICE.createCustomer("Tatyana", "Popova", "Petrovna", CITY_SERVICE.getCityByName("Novosibirsk"));
 
         System.out.println(CUSTOMER_SERVICE.getAllCustomers());
-        CUSTOMER_SERVICE.updateFirstName(62, "Tanya");
-        System.out.println(CUSTOMER_SERVICE.getCustomerById(62));
-        CUSTOMER_SERVICE.deleteById(62);
+        CUSTOMER_SERVICE.updateFirstName(12, "Tanya");
+        System.out.println(CUSTOMER_SERVICE.getCustomerById(12));
+        CUSTOMER_SERVICE.deleteById(12);
         System.out.println(CUSTOMER_SERVICE.getAllCustomers());
     }
 }

@@ -23,7 +23,7 @@ import lombok.Setter;
 public class Brand implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "brands_seq", sequenceName = "brands_seq")
+    @SequenceGenerator(name = "brands_seq", sequenceName = "brands_seq", allocationSize = 1)
     @GeneratedValue(generator = "brands_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
 

@@ -6,7 +6,7 @@
 
   <changeSet author="k.kirinyuk" id="2021-03-28--02-create-models">
 
-    <createSequence incrementBy="50" sequenceName="models_seq" startValue="100"/>
+    <createSequence incrementBy="1" sequenceName="models_seq" startValue="1"/>
 
     <createTable tableName="models">
       <column name="id" type="integer">

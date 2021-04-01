@@ -19,6 +19,8 @@ public interface CustomerRepository {
 
     List<Customer> findCustomersByCarModel(String model);
 
+    boolean existsById(long id);
+
     void updateFirstName(long id, String newFirstName);
 
     void addCustomerCar(long customerId, long carId);

@@ -6,7 +6,7 @@
 
   <changeSet author="k.kirinyuk" id="2021-03-28--05-create-customers">
 
-    <createSequence incrementBy="50" sequenceName="customers_seq" startValue="100"/>
+    <createSequence incrementBy="1" sequenceName="customers_seq" startValue="1"/>
 
     <createTable tableName="customers">
       <column name="id" type="integer">

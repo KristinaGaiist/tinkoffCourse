@@ -1,7 +1,6 @@
 package unit8.service;
 
 import java.util.List;
-import java.util.Objects;
 import unit8.data.Message;
 import unit8.entity.City;
 import unit8.exception.ValidationException;
@@ -20,7 +19,8 @@ public class CityService {
     }
 
     public City getCityByName(String name) {
-        return getCityByNameWithValidation(name);
+        return cityRepository.findByName(name)
+            .orElseThrow(() -> new ValidationException(Message.CITY_DOES_NOT_EXIST));
     }
 
     public City getCityById(long id) {
@@ -29,31 +29,26 @@ public class CityService {
     }
 
     public void createCity(String name) {
-        cityRepository.findByName(name)
-            .ifPresent(City -> {
-                throw new ValidationException(Message.CITY_ALREADY_EXIST);
-            });
+        if (cityRepository.existByName(name)) {
+            throw new ValidationException(Message.CITY_ALREADY_EXIST);
+        }
         cityRepository.addCity(name);
     }
 
     public void renameCity(String oldName, String newName) {
-        City oldCity = getCityByNameWithValidation(oldName);
-        cityRepository.findByName(newName)
-            .ifPresent(City -> {
-                if (!Objects.equals(City.getId(), oldCity.getId())) {
-                    throw new ValidationException(Message.CITY_ALREADY_EXIST);
-                }
-            });
-        cityRepository.updateCity(oldCity.getId(), newName);
+        City city = cityRepository.findByName(oldName)
+            .orElseThrow(() -> new ValidationException(Message.CITY_DOES_NOT_EXIST));
+        if (cityRepository.existsByName(newName, city.getId())) {
+            throw new ValidationException(Message.CITY_ALREADY_EXIST);
+        }
+
+        cityRepository.updateCity(city.getId(), newName);
     }
 
     public void deleteCity(String name) {
-        getCityByNameWithValidation(name);
+        if (!cityRepository.existByName(name)) {
+            throw new ValidationException(Message.CITY_DOES_NOT_EXIST);
+        }
         cityRepository.deleteCityByName(name);
-    }
-
-    private City getCityByNameWithValidation(String name) {
-        return cityRepository.findByName(name)
-            .orElseThrow(() -> new ValidationException(Message.CITY_DOES_NOT_EXIST));
     }
 }

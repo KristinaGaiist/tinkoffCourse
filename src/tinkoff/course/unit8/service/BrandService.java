@@ -1,7 +1,6 @@
 package unit8.service;
 
 import java.util.List;
-import java.util.Objects;
 import unit8.data.Message;
 import unit8.entity.Brand;
 import unit8.exception.ValidationException;
@@ -30,28 +29,26 @@ public class BrandService {
     }
 
     public void createBrand(String brandName) {
-        brandRepository.findByName(brandName)
-            .ifPresent(brand -> {
-                throw new ValidationException(Message.BRAND_ALREADY_EXIST);
-            });
+        if (brandRepository.existsByName(brandName)) {
+            throw new ValidationException(Message.BRAND_ALREADY_EXIST);
+        }
         brandRepository.addBrand(brandName);
     }
 
     public void renameBrand(String oldName, String newName) {
-        Brand oldBrand = getBrandByName(oldName);
-        brandRepository.findByName(newName)
-            .ifPresent(brand -> {
-                if (!Objects.equals(brand.getId(), oldBrand.getId())) {
-                    throw new ValidationException(Message.BRAND_ALREADY_EXIST);
-                }
-            });
-        brandRepository.updateBrand(oldBrand.getId(), newName);
+        Brand brand = brandRepository.findByName(oldName)
+            .orElseThrow(() -> new ValidationException(Message.BRAND_DOES_NOT_EXIST));
+        if (brandRepository.existsByName(newName, brand.getId())) {
+            throw new ValidationException(Message.BRAND_ALREADY_EXIST);
+        }
+
+        brandRepository.updateBrand(brand.getId(), newName);
     }
 
     public void deleteBrand(String brandName) {
-        brandRepository.findByName(brandName)
-            .orElseThrow(() -> new ValidationException(Message.BRAND_DOES_NOT_EXIST));
-
+        if (!brandRepository.existsByName(brandName)) {
+            throw new ValidationException(Message.BRAND_DOES_NOT_EXIST);
+        }
         brandRepository.deleteBrandByName(brandName);
     }
 }

@@ -14,6 +14,10 @@ public interface BrandRepository {
 
     Optional<Brand> findById(long id);
 
+    boolean existsByName(String name);
+
+    boolean existsByName(String name, long excludeId);
+
     void updateBrand(long id, String newName);
 
     void deleteBrandByName(String brandName);

@@ -1,0 +1,241 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+  version="3.1">
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <servlet>
+    <servlet-name>indexPageServlet</servlet-name>
+    <servlet-class>unit8.unit10.GetIndexPageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>indexPageServlet</servlet-name>
+      <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>getBrandServlet</servlet-name>
+    <servlet-class>unit8.unit10.brand.GetBrandServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getBrandServlet</servlet-name>
+    <url-pattern>/showBrands</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>updateBrandServlet</servlet-name>
+    <servlet-class>unit8.unit10.brand.UpdateBrandServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateBrandServlet</servlet-name>
+    <url-pattern>/updateBrand</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>deleteBrandServlet</servlet-name>
+    <servlet-class>unit8.unit10.brand.DeleteBrandServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteBrandServlet</servlet-name>
+    <url-pattern>/deleteBrand</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>createBrandServlet</servlet-name>
+    <servlet-class>unit8.unit10.brand.CreateBrandServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createBrandServlet</servlet-name>
+    <url-pattern>/createBrand</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>getBrandModelsServlet</servlet-name>
+    <servlet-class>unit8.unit10.brand.GetBrandModelsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getBrandModelsServlet</servlet-name>
+    <url-pattern>/showBrandModels</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>getModelServlet</servlet-name>
+    <servlet-class>unit8.unit10.model.GetModelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getModelServlet</servlet-name>
+    <url-pattern>/showModels</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>createModelServlet</servlet-name>
+    <servlet-class>unit8.unit10.model.CreateModelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createModelServlet</servlet-name>
+    <url-pattern>/createModel</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>updateModelServlet</servlet-name>
+    <servlet-class>unit8.unit10.model.UpdateModelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateModelServlet</servlet-name>
+    <url-pattern>/updateModel</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>deleteModelServlet</servlet-name>
+    <servlet-class>unit8.unit10.model.DeleteModelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteModelServlet</servlet-name>
+    <url-pattern>/deleteModel</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>getCityServlet</servlet-name>
+    <servlet-class>unit8.unit10.city.GetCityServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getCityServlet</servlet-name>
+    <url-pattern>/showCities</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>updateCityServlet</servlet-name>
+    <servlet-class>unit8.unit10.city.UpdateCityServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateCityServlet</servlet-name>
+    <url-pattern>/updateCity</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>deleteCityServlet</servlet-name>
+    <servlet-class>unit8.unit10.city.DeleteCityServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteCityServlet</servlet-name>
+    <url-pattern>/deleteCity</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>createCityServlet</servlet-name>
+    <servlet-class>unit8.unit10.city.CreateCityServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createCityServlet</servlet-name>
+    <url-pattern>/createCity</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>getCarServlet</servlet-name>
+    <servlet-class>unit8.unit10.car.GetCarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getCarServlet</servlet-name>
+    <url-pattern>/showCars</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>updateCarServlet</servlet-name>
+    <servlet-class>unit8.unit10.car.UpdateCarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateCarServlet</servlet-name>
+    <url-pattern>/updateCar</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>deleteCarServlet</servlet-name>
+    <servlet-class>unit8.unit10.car.DeleteCarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteCarServlet</servlet-name>
+    <url-pattern>/deleteCar</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>createCarServlet</servlet-name>
+    <servlet-class>unit8.unit10.car.CreateCarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createCarServlet</servlet-name>
+    <url-pattern>/createCar</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>getCarCustomersServlet</servlet-name>
+    <servlet-class>unit8.unit10.car.GetCarCustomersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getCarCustomersServlet</servlet-name>
+    <url-pattern>/showCarCustomers</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>getCustomerServlet</servlet-name>
+    <servlet-class>unit8.unit10.customer.GetCustomerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getCustomerServlet</servlet-name>
+    <url-pattern>/showCustomers</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>updateCustomerServlet</servlet-name>
+    <servlet-class>unit8.unit10.customer.UpdateCustomerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateCustomerServlet</servlet-name>
+    <url-pattern>/updateCustomer</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>deleteCustomerServlet</servlet-name>
+    <servlet-class>unit8.unit10.customer.DeleteCustomerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteCustomerServlet</servlet-name>
+    <url-pattern>/deleteCustomer</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>createCustomerServlet</servlet-name>
+    <servlet-class>unit8.unit10.customer.CreateCustomerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createCustomerServlet</servlet-name>
+    <url-pattern>/createCustomer</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>getCustomerCarsServlet</servlet-name>
+    <servlet-class>unit8.unit10.customer.GetCustomerCarsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getCustomerCarsServlet</servlet-name>
+    <url-pattern>/showCustomerCars</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>addCustomerCarServlet</servlet-name>
+    <servlet-class>unit8.unit10.customer.AddCustomerCarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addCustomerCarServlet</servlet-name>
+    <url-pattern>/addCustomerCar</url-pattern>
+  </servlet-mapping>
+
+
+  <error-page>
+    <exception-type>unit8.exception.ValidationException</exception-type>
+    <location>/error.jsp</location>
+  </error-page>
+</web-app>

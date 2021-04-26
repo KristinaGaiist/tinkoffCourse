@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+  <include file="src/main/resources/liquibase/changelog/2021-03-28--01-create-brands.xml"/>
+  <include file="src/main/resources/liquibase/changelog/2021-03-28--02-create-models.xml"/>
+  <include file="src/main/resources/liquibase/changelog/2021-03-28--03-create-cars.xml"/>
+  <include file="src/main/resources/liquibase/changelog/2021-03-28--04-create-cities.xml"/>
+  <include file="src/main/resources/liquibase/changelog/2021-03-28--05-create-customers.xml"/>
+  <include file="src/main/resources/liquibase/changelog/2021-03-29--06-create-customers-cars-relation.xml"/>
+</databaseChangeLog>

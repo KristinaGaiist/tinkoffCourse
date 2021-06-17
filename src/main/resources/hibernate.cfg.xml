@@ -18,5 +18,7 @@
     <mapping class="unit8.entity.Model"/>
     <mapping class="unit8.entity.Car"/>
     <mapping class="unit8.entity.Customer"/>
+    <mapping class="unit11.entity.Role"/>
+    <mapping class="unit11.entity.User"/>
   </session-factory>
 </hibernate-configuration>

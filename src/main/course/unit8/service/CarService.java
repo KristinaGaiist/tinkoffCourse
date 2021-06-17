@@ -1,12 +1,14 @@
 package unit8.service;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import unit8.data.Message;
 import unit8.entity.Car;
 import unit8.entity.Model;
 import unit8.exception.ValidationException;
 import unit8.repository.CarRepository;
 
+@Service
 public class CarService {
 
     private final CarRepository carRepository;

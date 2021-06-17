@@ -5,8 +5,10 @@ import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 import unit8.entity.City;
 
+@Repository
 public class HibernateCityRepository implements CityRepository {
 
     private SessionFactory sessionFactory;

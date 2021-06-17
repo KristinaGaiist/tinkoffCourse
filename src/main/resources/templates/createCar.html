@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Create new car</title>
+</head>
+<body>
+<form action="/createCar" method="post" th:object="${car}">
+  <label title="State Number">
+    <input name="stateNumber" type="text">
+  </label>
+  <label title="Model">
+    <select th:car.="*{gender}">
+      <option th:value="'M'" th:text="Male"></option>
+      <option th:value="'F'" th:text="Female"></option>
+    </select>
+  </label>
+  <input type="submit" value="Create car">
+</form>
+</body>
+</html>

@@ -5,12 +5,14 @@ import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 import unit8.entity.Car;
 import unit8.entity.Customer;
 
+@Repository
 public class HibernateCustomerRepository implements CustomerRepository {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     public HibernateCustomerRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

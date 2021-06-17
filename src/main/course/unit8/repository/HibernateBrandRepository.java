@@ -5,11 +5,15 @@ import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Repository;
 import unit8.entity.Brand;
 
+@Repository
+@ComponentScan({"unit11.configs"})
 public class HibernateBrandRepository implements BrandRepository {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     public HibernateBrandRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

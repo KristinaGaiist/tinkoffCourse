@@ -1,12 +1,14 @@
 package unit8.service;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import unit8.data.Message;
 import unit8.entity.Brand;
 import unit8.entity.Model;
 import unit8.exception.ValidationException;
 import unit8.repository.ModelRepository;
 
+@Service
 public class ModelService {
 
     private final ModelRepository modelRepository;

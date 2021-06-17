@@ -5,11 +5,13 @@ import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 import unit8.entity.Model;
 
+@Repository
 public class HibernateModelRepository implements ModelRepository {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     public HibernateModelRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

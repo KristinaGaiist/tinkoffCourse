@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="html">
+<body>
+<h1 th:text="Registration">form</h1>
+<form action="/" th:object="${user}" method="POST">
+  <div>
+    <label title="First Name">
+      <input th:field="*{firstName}"/>
+    </label>
+    <p th:each="error: ${#fields.errors('firstName')}"
+       th:text="${error}">Validation error</p>
+  </div>
+  <div>
+    <label title="Last Name">
+      <input th:field="*{lastName}"/>
+    </label>
+    <p th:each="error : ${#fields.errors('lastName')}"
+       th:text="${error}">Validation error</p>
+  </div>
+  <div>
+    <label title="Email">
+      <input type="email" th:field="*{email}"/>
+    </label>
+    <p th:each="error : ${#fields.errors('email')}"
+       th:text="${error}">Validation error</p>
+  </div>
+  <div>
+    <label title="Password">
+      <input type="password" th:field="*{password}"/>
+    </label>
+    <p th:each="error : ${#fields.errors('password')}"
+       th:text="${error}">Validation error</p>
+  </div>
+  <div>
+    <label th:text="#{label.user.confirmPass}">confirm</label>
+    <label title="Password confirmation">
+      <input type="password" th:field="*{matchingPassword}"/>
+    </label>
+  </div>
+  <button type="submit" th:text="#{label.form.submit}">submit</button>
+</form>
+
+<a th:href="@{/login.html}" th:text="Login">login</a>
+</body>
+</html>

@@ -1,0 +1,12 @@
+dontinline,*.*_all_jmhStub
+dontinline,*.*_avgt_jmhStub
+dontinline,*.*_sample_jmhStub
+dontinline,*.*_ss_jmhStub
+dontinline,*.*_thrpt_jmhStub
+inline,unit6/task2/ListBenchmark.addElements
+inline,unit6/task2/ListBenchmark.addElementsByIndex
+inline,unit6/task2/ListBenchmark.containsElements
+inline,unit6/task2/ListBenchmark.getElementsByIndex
+inline,unit6/task2/ListBenchmark.removeElements
+inline,unit6/task2/ListBenchmark.removeElementsByIndex
+inline,unit6/task2/ListBenchmarkState.setUp

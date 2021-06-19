@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+  <changeSet author="k.kirinyuk" id="create table customers_cars_relation">
+
+    <createTable tableName="customers_cars_relation">
+      <column name="customer_id" type="integer">
+        <constraints nullable="false" foreignKeyName="fk_customer_id" references="customers(id)" deleteCascade="true"/>
+      </column>
+      <column name="car_id" type="integer">
+        <constraints nullable="false" foreignKeyName="fk_car_id" references="cars(id)" deleteCascade="true"/>
+      </column>
+    </createTable>
+
+  </changeSet>
+
+</databaseChangeLog>

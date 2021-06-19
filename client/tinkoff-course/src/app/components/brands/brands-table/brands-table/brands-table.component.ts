@@ -45,13 +45,13 @@ export class BrandsTableComponent implements OnInit {
     this.matDialog
       .open(EditDialogComponent, { data })
       .afterClosed()
-      .subscribe((success: boolean) => success && this.loadBrands());
+      .subscribe(() => this.loadBrands());
   }
 
   delete(brand: Brand) {
     this.matDialog
       .open(DeleteDialogComponent, { data: { brand } })
       .afterClosed()
-      .subscribe((success: boolean) => success && this.loadBrands());
+      .subscribe(() => this.loadBrands());
   }
 }

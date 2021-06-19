@@ -22,10 +22,10 @@ export class DeleteDialogComponent {
 
   async delete() {
     await this.brandService.delete(this.data.brand);
-    this.dialogRef.close(true)
+    this.dialogRef.close()
   }
 
   cancel() {
-    this.dialogRef.close(false);
+    this.dialogRef.close();
   }
 }

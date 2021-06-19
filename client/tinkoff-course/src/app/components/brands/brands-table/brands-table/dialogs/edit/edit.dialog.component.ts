@@ -21,10 +21,10 @@ export class EditDialogComponent {
 
   async save() {
     await this.data.save(this.data.brand);
-    this.dialogRef.close(true);
+    this.dialogRef.close();
   }
 
   cancel() {
-    this.dialogRef.close(false);
+    this.dialogRef.close();
   }
 }

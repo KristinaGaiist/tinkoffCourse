@@ -1,0 +1,20 @@
+<div class="container">
+  <h3 mat-dialog-title>Are you sure to delete Customer #{{this.data.customer.lastName}} #
+    {{this.data.customer.firstName}} #{{this.data.customer.middleName}}?</h3>
+  <mat-dialog-content>
+    <mat-card>
+      <mat-card-content>
+        <div>ID: {{data.customer.id}}</div>
+        <div>LAST NAME: {{data.customer.lastName}}</div>
+        <div>FIRST NAME: {{data.customer.firstName}}</div>
+        <div>MIDDLE NAME: {{data.customer.middleName}}</div>
+        <div>CITY: {{data.customer.city.name}}</div>
+      </mat-card-content>
+    </mat-card>
+  </mat-dialog-content>
+
+  <div mat-dialog-actions class="actions">
+    <button mat-button (click)="delete()">Delete</button>
+    <button mat-button (click)="cancel()" tabindex="-1">Cancel</button>
+  </div>
+</div>

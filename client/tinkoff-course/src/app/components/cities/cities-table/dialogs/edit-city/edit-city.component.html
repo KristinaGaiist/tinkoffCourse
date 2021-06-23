@@ -1,0 +1,11 @@
+<div>
+  <h3 mat-dialog-title>Add new City</h3>
+
+  <mat-form-field appearance="standard">
+    <mat-label>City Name</mat-label>
+    <input matInput placeholder="Enter city name..." [(ngModel)]="data.city.name">
+  </mat-form-field>
+
+  <button mat-button (click)="save()">Save</button>
+  <button mat-button (click)="cancel()" tabindex="-1">Cancel</button>
+</div>

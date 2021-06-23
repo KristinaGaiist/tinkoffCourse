@@ -1,0 +1,33 @@
+<div class="container">
+  <h3 mat-dialog-title>Car #{{this.data.car.stateNumber}}?</h3>
+  <div mat-dialog-content>
+    <form>
+      <mat-form-field>
+        <mat-label>Customer</mat-label>
+        <input type="text" matInput [formControl]="formControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="display">
+          <mat-option *ngFor="let customer of filteredCustomers" [value]="customer">
+            {{customer.lastName}} {{customer.firstName}} {{customer.middleName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button mat-icon-button color="primary" (click)="addCustomer()">
+        Add
+      </button>
+    </form>
+    <mat-list role="list">
+      <div>Customer List</div>
+      <mat-list-item role="listitem" *ngFor="let customer of carCustomers">
+        <div mat-line>{{customer.lastName}} {{customer.firstName}} {{customer.middleName}} {{customer.city.name}}</div>
+
+        <button mat-icon-button color="primary" (click)="delete(customer)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+</div>

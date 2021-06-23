@@ -11,4 +11,5 @@ public class ModelDto {
 
     private long id;
     private String model;
+    private BrandDto brand;
 }

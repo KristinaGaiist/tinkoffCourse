@@ -10,4 +10,5 @@
   <include file="src/tinkoff/resources/liquibase/changelog/2021-03-28--04-create-cities.xml"/>
   <include file="src/tinkoff/resources/liquibase/changelog/2021-03-28--05-create-customers.xml"/>
   <include file="src/tinkoff/resources/liquibase/changelog/2021-03-29--06-create-customers-cars-relation.xml"/>
+  <include file="src/tinkoff/resources/liquibase/changelog/2021-06-18--07-create-users.xml"/>
 </databaseChangeLog>

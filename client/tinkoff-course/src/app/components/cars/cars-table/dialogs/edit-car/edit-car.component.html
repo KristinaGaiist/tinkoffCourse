@@ -1,0 +1,20 @@
+<div>
+  <h3 mat-dialog-title>Add new Car</h3>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Car</mat-label>
+    <input matInput placeholder="Enter car..." [(ngModel)]="data.car.stateNumber">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Models</mat-label>
+    <mat-select [(ngModel)]="data.car.model">
+      <mat-option *ngFor="let model of models" [value]="model">
+        {{model.model}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-button (click)="save()">Save</button>
+  <button mat-button (click)="cancel()" tabindex="-1">Cancel</button>
+</div>

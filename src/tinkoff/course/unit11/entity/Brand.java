@@ -1,19 +1,19 @@
 package unit11.entity;
 
-import com.sun.istack.NotNull;
-import javax.persistence.Access;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.Collection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
-import javax.validation.Valid;
 
 @Data
 @Entity
@@ -29,4 +29,13 @@ public class Brand {
     @Valid
     @NotBlank(message = "Name is mandatory")
     private String name;
+
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Collection<Model> models;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -1,12 +1,10 @@
 package unit11.controller;
 
 import java.util.List;
-import javax.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +21,7 @@ import unit11.service.BrandService;
 @Validated
 @RestController
 @RequestMapping("/brands")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class BrandController {
 
     private final BrandService brandService;
@@ -33,6 +32,7 @@ public class BrandController {
     }
 
     @GetMapping()
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<BrandDto[]> getBrands() {
 
         List<Brand> brandList = brandService.getBrands();
@@ -48,6 +48,7 @@ public class BrandController {
     public ResponseEntity<Void> createBrand(@RequestBody BrandDto brandDto) {
 
         brandService.createBrand(brandDto.getName());
+
         return ResponseEntity.noContent().build();
 
     }
@@ -56,17 +57,15 @@ public class BrandController {
     public ResponseEntity<Void> updateBrand(@RequestBody BrandDto brandDto) {
 
         brandService.updateBrand(brandDto.getId(), brandDto.getName());
+
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteBrand(@PathVariable long id) {
+    public ResponseEntity<Void> deleteBrand(@PathVariable long id) {
 
-        try {
-            brandService.deleteBrand(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Object());
-        }
+        brandService.deleteBrand(id);
+
+        return ResponseEntity.noContent().build();
     }
 }

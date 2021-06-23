@@ -1,0 +1,22 @@
+<div>
+  <h3 mat-dialog-title>Add new Customer</h3>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Car</mat-label>
+    <input matInput placeholder="Enter customer firstName..." [(ngModel)]="data.customer.lastName">
+    <input matInput placeholder="Enter customer lastName..." [(ngModel)]="data.customer.firstName">
+    <input matInput placeholder="Enter customer middleName..." [(ngModel)]="data.customer.middleName">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Cities</mat-label>
+    <mat-select [(ngModel)]="data.customer.city">
+      <mat-option *ngFor="let city of cities" [value]="city">
+        {{city.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-button (click)="save()">Save</button>
+  <button mat-button (click)="cancel()" tabindex="-1">Cancel</button>
+</div>

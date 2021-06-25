@@ -25,3 +25,8 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+КАК ЗАПУСТИТЬ ПОСТГРЕС
+PS C:\Users\k.kirinyuk\Documents> cd .\postgre-docker\
+PS C:\Users\k.kirinyuk\Documents\postgre-docker> docker-compose up -d

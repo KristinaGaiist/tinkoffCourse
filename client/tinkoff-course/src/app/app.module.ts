@@ -35,6 +35,8 @@ import {EditCustomerComponent} from './components/customers/customers-table/dial
 import {CarCustomersComponent} from './components/cars/cars-table/dialogs/car-customers/car-customers.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {CustomerCarsComponent} from './components/customers/customers-table/dialogs/customer-cars/customer-cars.component';
+import {UserRegistrationComponent} from './components/register/user-registration/user-registration.component';
+import {UserLoginComponent} from './components/register/user-login/user-login.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import {CustomerCarsComponent} from './components/customers/customers-table/dial
     EditCustomerComponent,
     CarCustomersComponent,
     CustomerCarsComponent,
+    UserRegistrationComponent,
+    UserLoginComponent,
   ],
   imports: [
     BrowserModule,

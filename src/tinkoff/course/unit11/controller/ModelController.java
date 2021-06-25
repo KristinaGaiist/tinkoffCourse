@@ -33,7 +33,7 @@ public class ModelController {
     }
 
     @GetMapping()
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<ModelDto[]> getModels() {
 
         List<Model> modelList = modelService.getModels();

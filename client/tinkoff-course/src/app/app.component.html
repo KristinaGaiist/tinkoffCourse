@@ -12,7 +12,13 @@
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="20px" class="navigation-items">
       <li>
-        <a>
+        <a (click)="openRegistration()">
+          <mat-icon class="icon">app_registration</mat-icon>
+          <span class="label">Registration</span>
+        </a>
+      </li>
+      <li>
+        <a (click)="openLogin()">
           <mat-icon class="icon">input</mat-icon>
           <span class="label">Login</span>
         </a>

@@ -1,0 +1,26 @@
+<div>
+  <h3 mat-dialog-title>Registration</h3>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Username</mat-label>
+    <input matInput placeholder="Enter username..." [(ngModel)]="user.username">
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>First Name</mat-label>
+    <input matInput placeholder="Enter first name..." [(ngModel)]="user.firstName">
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Last Name</mat-label>
+    <input matInput placeholder="Enter last name..." [(ngModel)]="user.lastName">
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput placeholder="Enter password..." [(ngModel)]="user.password">
+  </mat-form-field>
+
+  <button mat-button (click)="register()">Register</button>
+  <button mat-button (click)="cancel()">Cancel</button>
+</div>

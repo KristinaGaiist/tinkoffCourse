@@ -4,6 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {CityService} from "../../../client/city.service";
 import {EditCityComponent, IEditCityData} from "./dialogs/edit-city/edit-city.component";
 import {DeleteCityComponent} from "./dialogs/delete-city/delete-city.component";
+import {UserStore} from "../../../stores/user-store";
 
 @Component({
   selector: 'app-cities-table',
@@ -52,5 +53,9 @@ export class CitiesTableComponent implements OnInit {
     .open(DeleteCityComponent, {data: {city}})
     .afterClosed()
     .subscribe(() => this.loadCities());
+  }
+
+  canModify(city: City): boolean {
+    return UserStore.canModify(city.author);
   }
 }

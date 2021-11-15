@@ -1,4 +1,4 @@
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -37,6 +37,9 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {CustomerCarsComponent} from './components/customers/customers-table/dialogs/customer-cars/customer-cars.component';
 import {UserRegistrationComponent} from './components/register/user-registration/user-registration.component';
 import {UserLoginComponent} from './components/register/user-login/user-login.component';
+import {AuthInterceptor} from "./client/interceptors/auth.interceptor";
+import {ErrorInterceptor} from "./client/interceptors/error.interceptor";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -82,9 +85,21 @@ import {UserLoginComponent} from './components/register/user-login/user-login.co
     MatButtonModule,
     MatSelectModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   exports: []
 })

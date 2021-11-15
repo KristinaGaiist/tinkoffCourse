@@ -8,7 +8,8 @@ import {Config} from "../../config";
 })
 export class ModelService {
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {
+  }
 
   public getAll(): Promise<Model[]> {
     return this.http.get<Model[]>(`${Config.baseUrl}/models`).toPromise();

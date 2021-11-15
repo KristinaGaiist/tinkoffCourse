@@ -1,7 +1,7 @@
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject } from '@angular/core';
-import { BrandService } from 'src/app/client/brand.service';
-import { Brand } from 'src/app/models/brand';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Component, Inject} from '@angular/core';
+import {BrandService} from 'src/app/client/brand.service';
+import {Brand} from 'src/app/models/brand';
 
 export interface IDeleteDialogData {
   brand: Brand;
@@ -15,9 +15,10 @@ export interface IDeleteDialogData {
 export class DeleteDialogComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<DeleteDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IDeleteDialogData,
-    public brandService: BrandService) { }
+      public dialogRef: MatDialogRef<DeleteDialogComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: IDeleteDialogData,
+      public brandService: BrandService) {
+  }
 
 
   async delete() {

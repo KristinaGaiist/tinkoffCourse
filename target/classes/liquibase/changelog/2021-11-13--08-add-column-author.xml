@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+  <changeSet author="k.kirinyuk" id="add column author_id to brands table">
+    <addColumn tableName="brands">
+      <column name="author_id" type="integer">
+        <constraints nullable="false"/>
+      </column>
+    </addColumn>
+
+    <addForeignKeyConstraint baseColumnNames="author_id"
+      baseTableName="brands"
+      constraintName="fk_author_id"
+      referencedColumnNames="id"
+      referencedTableName="users"/>
+  </changeSet>
+
+  <changeSet author="k.kirinyuk" id="add column author_id to models table">
+    <addColumn tableName="models">
+      <column name="author_id" type="integer">
+        <constraints nullable="false"/>
+      </column>
+    </addColumn>
+
+    <addForeignKeyConstraint baseColumnNames="author_id"
+      baseTableName="models"
+      constraintName="fk_author_id"
+      referencedColumnNames="id"
+      referencedTableName="users"/>
+  </changeSet>
+
+  <changeSet author="k.kirinyuk" id="add column author_id to cars table">
+    <addColumn tableName="cars">
+      <column name="author_id" type="integer">
+        <constraints nullable="false"/>
+      </column>
+    </addColumn>
+
+    <addForeignKeyConstraint baseColumnNames="author_id"
+      baseTableName="cars"
+      constraintName="fk_author_id"
+      referencedColumnNames="id"
+      referencedTableName="users"/>
+  </changeSet>
+
+  <changeSet author="k.kirinyuk" id="add column author_id to cities table">
+  <addColumn tableName="cities">
+    <column name="author_id" type="integer">
+      <constraints nullable="false"/>
+    </column>
+  </addColumn>
+
+    <addForeignKeyConstraint baseColumnNames="author_id"
+      baseTableName="cities"
+      constraintName="fk_author_id"
+      referencedColumnNames="id"
+      referencedTableName="users"/>
+  </changeSet>
+
+  <changeSet author="k.kirinyuk" id="add column author_id to customers table">
+    <addColumn tableName="customers">
+      <column name="author_id" type="integer">
+        <constraints nullable="false"/>
+      </column>
+    </addColumn>
+
+    <addForeignKeyConstraint baseColumnNames="author_id"
+      baseTableName="customers"
+      constraintName="fk_author_id"
+      referencedColumnNames="id"
+      referencedTableName="users"/>
+  </changeSet>
+</databaseChangeLog>

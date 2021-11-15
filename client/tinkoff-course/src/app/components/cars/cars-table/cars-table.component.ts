@@ -5,6 +5,7 @@ import {CarService} from "../../../client/car.service";
 import {DeleteCarComponent} from "./dialogs/delete-car/delete-car.component";
 import {EditCarComponent, IEditCarData} from './dialogs/edit-car/edit-car.component';
 import {CarCustomersComponent} from "./dialogs/car-customers/car-customers.component";
+import {UserStore} from "../../../stores/user-store";
 
 @Component({
   selector: 'app-cars-table',
@@ -16,7 +17,7 @@ export class CarsTableComponent implements OnInit {
   cars: Car[] = [];
 
   constructor(private readonly carService: CarService,
-    private readonly matDialog: MatDialog) {
+              private readonly matDialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -43,22 +44,26 @@ export class CarsTableComponent implements OnInit {
 
   openEditDialog(data: IEditCarData) {
     this.matDialog
-      .open(EditCarComponent, { data })
-      .afterClosed()
-      .subscribe(() => this.loadCars());
+    .open(EditCarComponent, {data})
+    .afterClosed()
+    .subscribe(() => this.loadCars());
   }
 
   delete(car: Car) {
     this.matDialog
-      .open(DeleteCarComponent, { data: { car } })
-      .afterClosed()
-      .subscribe(() => this.loadCars());
+    .open(DeleteCarComponent, {data: {car}})
+    .afterClosed()
+    .subscribe(() => this.loadCars());
   }
 
   showCustomers(car: Car) {
     this.matDialog
-    .open(CarCustomersComponent, { data: { car } })
+    .open(CarCustomersComponent, {data: {car}})
     .afterClosed()
     .subscribe(() => this.loadCars());
+  }
+
+  canModify(car: Car): boolean {
+    return UserStore.canModify(car.author);
   }
 }

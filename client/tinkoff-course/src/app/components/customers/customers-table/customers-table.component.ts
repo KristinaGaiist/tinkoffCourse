@@ -4,6 +4,7 @@ import {Customer} from "../../../models/customer";
 import {CustomerService} from "../../../client/customer.service";
 import {DeleteCustomerComponent} from "./dialogs/delete-customer/delete-customer.component";
 import {EditCustomerComponent, IEditCustomerData} from "./dialogs/edit-customer/edit-customer.component";
+import {UserStore} from "../../../stores/user-store";
 
 @Component({
   selector: 'app-customers-table',
@@ -52,5 +53,9 @@ export class CustomersTableComponent implements OnInit {
     .open(DeleteCustomerComponent, {data: {customer}})
     .afterClosed()
     .subscribe(() => this.loadCustomers());
+  }
+
+  canModify(customer: Customer): boolean {
+    return UserStore.canModify(customer.author);
   }
 }

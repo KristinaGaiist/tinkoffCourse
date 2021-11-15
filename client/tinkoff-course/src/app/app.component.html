@@ -12,18 +12,6 @@
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="20px" class="navigation-items">
       <li>
-        <a (click)="openRegistration()">
-          <mat-icon class="icon">app_registration</mat-icon>
-          <span class="label">Registration</span>
-        </a>
-      </li>
-      <li>
-        <a (click)="openLogin()">
-          <mat-icon class="icon">input</mat-icon>
-          <span class="label">Login</span>
-        </a>
-      </li>
-      <li>
         <a>
           <mat-icon class="icon">home</mat-icon>
           <span class="label">Home</span>
@@ -59,8 +47,20 @@
           <span class="label">Cars</span>
         </a>
       </li>
-      <li>
-        <a>
+      <li [hidden]="getIsLogged()">
+        <a (click)="openRegistration()">
+          <mat-icon class="icon">app_registration</mat-icon>
+          <span class="label">Registration</span>
+        </a>
+      </li>
+      <li [hidden]="getIsLogged()">
+        <a (click)="openLogin()">
+          <mat-icon class="icon">input</mat-icon>
+          <span class="label">Login</span>
+        </a>
+      </li>
+      <li [hidden]="!getIsLogged()">
+        <a (click)="logout()">
           <mat-icon class="icon">input</mat-icon>
           <span class="label">LogOut</span>
         </a>

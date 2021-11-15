@@ -8,7 +8,8 @@ import {City} from "../models/city";
 })
 export class CityService {
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {
+  }
 
   public getAll(): Promise<City[]> {
     return this.http.get<City[]>(`${Config.baseUrl}/cities`).toPromise();

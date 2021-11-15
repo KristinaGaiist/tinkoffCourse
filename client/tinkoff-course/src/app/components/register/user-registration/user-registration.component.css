@@ -2,6 +2,6 @@
   display: block;
 }
 
-.container>* {
+.container > * {
   width: 100%;
 }

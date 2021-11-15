@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { BrandService } from "../../../../client/brand.service";
-import { Brand } from "../../../../models/brand";
-import { DeleteDialogComponent } from './dialogs/delete/delete.dialog.component';
-import { EditDialogComponent, IEditDialogData } from './dialogs/edit/edit.dialog.component';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {UserStore} from 'src/app/stores/user-store';
+import {BrandService} from "../../../../client/brand.service";
+import {Brand} from "../../../../models/brand";
+import {DeleteDialogComponent} from './dialogs/delete/delete.dialog.component';
+import {EditDialogComponent, IEditDialogData} from './dialogs/edit/edit.dialog.component';
 
 @Component({
   selector: 'app-brands-table',
@@ -15,8 +16,9 @@ export class BrandsTableComponent implements OnInit {
   brands: Brand[] = [];
 
   constructor(
-    private readonly brandService: BrandService,
-    private readonly matDialog: MatDialog) { }
+      private readonly brandService: BrandService,
+      private readonly matDialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.loadBrands();
@@ -43,15 +45,19 @@ export class BrandsTableComponent implements OnInit {
 
   openEditDialog(data: IEditDialogData) {
     this.matDialog
-      .open(EditDialogComponent, { data })
-      .afterClosed()
-      .subscribe(() => this.loadBrands());
+    .open(EditDialogComponent, {data})
+    .afterClosed()
+    .subscribe(() => this.loadBrands());
   }
 
   delete(brand: Brand) {
     this.matDialog
-      .open(DeleteDialogComponent, { data: { brand } })
-      .afterClosed()
-      .subscribe(() => this.loadBrands());
+    .open(DeleteDialogComponent, {data: {brand}})
+    .afterClosed()
+    .subscribe(() => this.loadBrands());
+  }
+
+  canModify(brand: Brand): boolean {
+    return UserStore.canModify(brand.author);
   }
 }

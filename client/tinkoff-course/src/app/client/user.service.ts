@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Config} from "../../config";
-import {User} from "../models/user";
+import {RegisterUserRequest} from "../models/register-user-request";
 import {LoginResult} from "../models/login-result";
+import {CurrentUser, CurrentUserRecord} from "../models/current-user";
 
 @Injectable({
   providedIn: 'root'
@@ -12,20 +13,30 @@ export class UserService {
   constructor(private readonly http: HttpClient) {
   }
 
-  public getRole(): Promise<string> {
-    return this.http.get<string>(`${Config.baseUrl}/users/role`).toPromise();
+  public async getCurrentUser(): Promise<CurrentUser> {
+    const currentUserRecord = await this.http.get<CurrentUserRecord>(`${Config.baseUrl}/users`).toPromise();
+    return new CurrentUser(currentUserRecord);
   }
 
-  public async register(user: User): Promise<void> {
+  public async register(user: RegisterUserRequest): Promise<void> {
     await this.http.post(`${Config.baseUrl}/users/registration`, user).toPromise();
   }
 
-  public login(username: string, password: string): Promise<LoginResult> {
-    let body = new FormData();
-    body.append('username', username);
-    body.append('password', password);
-    body.append('grant_type', "password");
+  public async login(username: string, password: string): Promise<LoginResult> {
 
-    return this.http.post<LoginResult>(`http://testjwtclientid:XY7kmzoNzl100@localhost:6060/oauth/token`, body.toString()).toPromise();
+    const headers = new HttpHeaders(username && password ? {
+      authorization: 'Basic ' + btoa(username + ':' + password)
+    } : {});
+
+    await this.http.get(`${Config.baseUrl}/basicAuth`, {headers: headers}).toPromise();
+
+    const result = new LoginResult();
+    result.access_token = btoa(username + ':' + password);
+
+    return result;
+  }
+
+  public async logout() {
+    await this.http.post(`${Config.baseUrl}/basicAuth`, {}).toPromise();
   }
 }

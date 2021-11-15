@@ -4,11 +4,12 @@
   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-  <include file="src/tinkoff/resources/liquibase/changelog/2021-03-28--01-create-brands.xml"/>
-  <include file="src/tinkoff/resources/liquibase/changelog/2021-03-28--02-create-models.xml"/>
-  <include file="src/tinkoff/resources/liquibase/changelog/2021-03-28--03-create-cars.xml"/>
-  <include file="src/tinkoff/resources/liquibase/changelog/2021-03-28--04-create-cities.xml"/>
-  <include file="src/tinkoff/resources/liquibase/changelog/2021-03-28--05-create-customers.xml"/>
-  <include file="src/tinkoff/resources/liquibase/changelog/2021-03-29--06-create-customers-cars-relation.xml"/>
-  <include file="src/tinkoff/resources/liquibase/changelog/2021-06-18--07-create-users.xml"/>
+  <include file="src/tinkoff-course/resources/liquibase/changelog/2021-03-28--01-create-brands.xml"/>
+  <include file="src/tinkoff-course/resources/liquibase/changelog/2021-03-28--02-create-models.xml"/>
+  <include file="src/tinkoff-course/resources/liquibase/changelog/2021-03-28--03-create-cars.xml"/>
+  <include file="src/tinkoff-course/resources/liquibase/changelog/2021-03-28--04-create-cities.xml"/>
+  <include file="src/tinkoff-course/resources/liquibase/changelog/2021-03-28--05-create-customers.xml"/>
+  <include file="src/tinkoff-course/resources/liquibase/changelog/2021-03-29--06-create-customers-cars-relation.xml"/>
+  <include file="src/tinkoff-course/resources/liquibase/changelog/2021-06-18--07-create-users.xml"/>
+  <include file="src/tinkoff-course/resources/liquibase/changelog/2021-11-13--08-add-column-author.xml"/>
 </databaseChangeLog>

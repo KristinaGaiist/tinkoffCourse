@@ -4,6 +4,7 @@ import {Component, OnInit} from '@angular/core';
 import {ModelService} from "../../../../client/model.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteModelComponent} from "./dialogs/delete-model/delete-model.component";
+import {UserStore} from "../../../../stores/user-store";
 
 @Component({
   selector: 'app-models-table',
@@ -15,7 +16,7 @@ export class ModelsTableComponent implements OnInit {
   models: Model[] = [];
 
   constructor(private readonly modelService: ModelService,
-    private readonly matDialog: MatDialog) {
+              private readonly matDialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -42,15 +43,19 @@ export class ModelsTableComponent implements OnInit {
 
   openEditDialog(data: IEditModelData) {
     this.matDialog
-      .open(EditModelComponent, { data })
-      .afterClosed()
-      .subscribe(() => this.loadModels());
+    .open(EditModelComponent, {data})
+    .afterClosed()
+    .subscribe(() => this.loadModels());
   }
 
   delete(model: Model) {
     this.matDialog
-      .open(DeleteModelComponent, { data: { model } })
-      .afterClosed()
-      .subscribe(() => this.loadModels());
+    .open(DeleteModelComponent, {data: {model}})
+    .afterClosed()
+    .subscribe(() => this.loadModels());
+  }
+
+  canModify(model: Model): boolean {
+    return UserStore.canModify(model.author);
   }
 }

@@ -1,0 +1,75 @@
+<mat-toolbar color="primary">
+  <div fxHide.gt-xs>
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <a>
+      Tinkoff Course App
+    </a>
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+      <li>
+        <a>
+          <mat-icon class="icon">home</mat-icon>
+          <span class="label">Home</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/brands">
+          <mat-icon class="icon">store</mat-icon>
+          <span class="label">Brands</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/models">
+          <mat-icon class="icon">filter_1</mat-icon>
+          <span class="label">Models</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/cities">
+          <mat-icon class="icon">location_city</mat-icon>
+          <span class="label">Cities</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/customers">
+          <mat-icon class="icon">person</mat-icon>
+          <span class="label">Customers</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/cars">
+          <mat-icon class="icon">directions_car</mat-icon>
+          <span class="label">Cars</span>
+        </a>
+      </li>
+      <li [hidden]="getIsLogged()">
+        <a (click)="openRegistration()">
+          <mat-icon class="icon">app_registration</mat-icon>
+          <span class="label">Registration</span>
+        </a>
+      </li>
+      <li [hidden]="getIsLogged()">
+        <a (click)="openLogin()">
+          <mat-icon class="icon">input</mat-icon>
+          <span class="label">Login</span>
+        </a>
+      </li>
+      <li [hidden]="!getIsLogged()">
+        <a (click)="logout()">
+          <mat-icon class="icon">input</mat-icon>
+          <span class="label">LogOut</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>
+<main>
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+</main>

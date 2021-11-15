@@ -1,0 +1,11 @@
+<div>
+  <h3 mat-dialog-title>Add new Brand</h3>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Brand Name</mat-label>
+    <input matInput placeholder="Enter brand name..." [(ngModel)]="data.brand.name">
+  </mat-form-field>
+
+  <button mat-button (click)="save()">Save</button>
+  <button mat-button (click)="cancel()" tabindex="-1">Cancel</button>
+</div>

@@ -1,0 +1,16 @@
+<div class="container">
+  <h3 mat-dialog-title>Are you sure to delete City #{{this.data.city.id}}?</h3>
+  <mat-dialog-content>
+    <mat-card>
+      <mat-card-content>
+        <div>ID: {{data.city.id}}</div>
+        <div>NAME: {{data.city.name}}</div>
+      </mat-card-content>
+    </mat-card>
+  </mat-dialog-content>
+
+  <div mat-dialog-actions class="actions">
+    <button mat-button (click)="delete()">Delete</button>
+    <button mat-button (click)="cancel()" tabindex="-1">Cancel</button>
+  </div>
+</div>
